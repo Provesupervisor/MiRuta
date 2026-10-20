@@ -1,18 +1,33 @@
 {
-  "id": "./ruta.html",
+  "id": "./",
   "name": "Mi Ruta · Provefabrica",
   "short_name": "Mi Ruta",
   "description": "Estado de entrega de las facturas y orden de visita de cada camión.",
-  "start_url": "./ruta.html",
-  "scope": "./ruta.html",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#1a1a1a",
   "theme_color": "#1a1a1a",
   "lang": "es-PE",
   "icons": [
-    { "src": "ruta-icono-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "ruta-icono-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "ruta-icono-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "ruta-icono-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "ruta-icono-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "ruta-icono-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }

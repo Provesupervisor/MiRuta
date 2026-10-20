@@ -3,8 +3,9 @@
     Está por dos razones: para que el celular ofrezca INSTALAR la app
     y para que abra aunque el chofer esté sin señal.
 
-    Controla SOLO ruta.html (se registra con scope './ruta.html'). El
-    planificador vive en la misma carpeta y no pasa por aquí.
+    Mi Ruta vive en su propio repositorio (provesupervisor.github.io/MiRuta/),
+    con la app en index.html, así que controla toda esa carpeta. El
+    planificador está en otro repositorio y no pasa por aquí.
 
     LA PÁGINA VA SIEMPRE A LA RED PRIMERO: así cada versión nueva llega
     sola, igual que hoy. La copia guardada solo se usa sin señal.
@@ -17,10 +18,11 @@
     los envía cuando vuelve la conexión.
 */
 
-const VERSION = 'miruta-v1';
-const PAGINA = './ruta.html';
+const VERSION = 'miruta-v2';
+const PAGINA = './';
 const BASICOS = [
   PAGINA,
+  './index.html',
   './ruta.webmanifest',
   './ruta-icono-192.png',
   './ruta-icono-512.png',
@@ -53,11 +55,12 @@ self.addEventListener('fetch', ev => {
   if (url.origin !== self.location.origin) return;
 
   // La app: red primero; la copia (siempre bajo el mismo nombre, sin ?v=) solo sin señal.
-  if (url.pathname.endsWith('/ruta.html') || req.mode === 'navigate') {
+  const esApp = req.mode === 'navigate' || url.pathname.endsWith('/') || url.pathname.endsWith('.html');
+  if (esApp) {
     ev.respondWith(
       fetch(req)
         .then(res => {
-          if (res.ok && url.pathname.endsWith('/ruta.html')) {
+          if (res.ok) {
             const copia = res.clone();
             caches.open(VERSION).then(c => c.put(PAGINA, copia)).catch(() => {});
           }
@@ -69,7 +72,7 @@ self.addEventListener('fetch', ev => {
   }
 
   // Manifiesto e íconos: de la caché si están.
-  if (BASICOS.some(b => url.pathname.endsWith(b.slice(1)))) {
+  if (BASICOS.some(b => b.length > 2 && url.pathname.endsWith(b.slice(1)))) {
     ev.respondWith(caches.match(req, { ignoreSearch: true }).then(r => r || fetch(req)));
   }
 });
