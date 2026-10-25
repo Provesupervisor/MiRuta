@@ -270,7 +270,13 @@ body.con-pie .pant{padding-bottom:calc(92px + var(--safe-b))}
 .velo.on{opacity:1;pointer-events:auto}
 .hoja{position:fixed;left:0;right:0;bottom:0;z-index:41;background:#fff;border-radius:22px 22px 0 0;max-width:640px;margin:0 auto;padding:10px 16px calc(16px + var(--safe-b));max-height:92vh;overflow:auto;transform:translateY(0);transition:transform .24s cubic-bezier(.2,.8,.2,1)}
 .hoja.cerrada{transform:translateY(105%)}
-.asa{width:44px;height:5px;border-radius:3px;background:#cfd4da;margin:0 auto 12px}
+.asa{display:block;width:44px;height:5px;border-radius:3px;background:#cfd4da;margin:0 auto}
+/* cabecera fija de la hoja: agarradera (tocar o arrastrar) y ✕ */
+.hoja-top{position:sticky;top:-10px;z-index:3;margin:-10px -16px 6px;height:44px;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:22px 22px 0 0;touch-action:none}
+.asa-btn{border:0;background:none;width:120px;height:44px;display:grid;place-items:center;padding:0;cursor:grab}
+.asa-btn:active .asa{background:#9aa3ad}
+.hoja-x{position:absolute;right:10px;top:6px;width:34px;height:34px;border-radius:50%;border:0;background:#f1f3f5;color:#3a4048;font-size:16px;font-weight:700;display:grid;place-items:center}
+.hoja-x:active{background:#e2e6ea}
 .hoja h3{margin:0;font-size:20px}
 .hoja .sub{color:var(--suave);font-size:14px;margin:2px 0 14px}
 .opciones{display:flex;flex-direction:column;gap:8px}
@@ -459,6 +465,59 @@ body.con-pie .inst,body:has(.hoja:not(.cerrada)) .inst{display:none}
 .tl.ro .facb{cursor:default}
 .tl.ro .facb:active{background:#fafbfc}
 
+/* ---------- fotos de la guía firmada ---------- */
+.fb{display:inline-flex;align-items:center;gap:4px;flex:none;font-size:12px;font-weight:700;border-radius:99px;padding:3px 8px;line-height:1.2;white-space:nowrap}
+.fb svg{width:14px;height:14px}
+.fb.ok{background:#e7f0fb;color:#1e4f86}
+.fb.falta{background:#fff1e0;color:#9a4a07;border:1px dashed #e0a35a}
+.fb.pend{background:#fff4dc;color:#7a4b00}
+.nov-btn.foto-btn{border-color:#b9cbe3;background:#f2f7fd;color:#1e4f86}
+.nov-btn.foto-btn i{background:#1e4f86}
+.nov-btn.foto-btn.falta{border-color:#e0a35a;background:#fff4e6;color:#9a4a07}
+.nov-btn.foto-btn.falta i{background:#c2410c}
+.t-acc-btns{display:flex;gap:6px;flex:none;margin-left:auto}
+.t-pie{flex-wrap:wrap;row-gap:6px}.t-pie .hrs{flex:1 1 170px}
+.btn.foto{background:#1e4f86;border-color:#1e4f86;color:#fff}
+.foto-link{border-color:#b9cbe3;background:#f2f7fd;color:#173c66}
+.foto-link>.ico:first-child{color:#1e4f86}
+.foto-link small{color:#4b6280}
+.ff{border:1px solid var(--linea);border-radius:14px;padding:10px 12px;margin-top:8px}
+.ff-cab{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.ff-cab b{font-size:15.5px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;min-width:0}
+.ff-cab small{display:block;font-size:12.5px;color:var(--suave);font-weight:400}
+.miniaturas{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.mini{position:relative;width:72px;height:72px;border-radius:12px;border:0;padding:0;overflow:hidden;background:#e9edf2;display:grid;place-items:center;color:#1e4f86;flex:none}
+.mini img{width:100%;height:100%;object-fit:cover;display:block}
+.mini .ok-ic{display:grid;place-items:center;gap:2px;font-size:11px;font-weight:700}
+.mini .ok-ic svg{width:24px;height:24px}
+.mini .p{position:absolute;right:4px;top:4px;width:12px;height:12px;border-radius:50%;background:#f59e0b;border:2px solid #fff}
+.mini .h{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.55);color:#fff;font-size:10.5px;text-align:center;padding:1px 0}
+.cam-acc{display:flex;gap:8px;margin-top:10px}
+.cam-acc .btn{min-height:46px;font-size:15px;border-radius:12px}
+.cam-acc .btn.cam{background:#1e4f86;border-color:#1e4f86;color:#fff;flex:1}
+.cam-acc .btn.gal{flex:0 0 auto;padding:8px 14px}
+.ff-todas{display:flex;align-items:center;gap:10px;font-size:15px;padding:12px;border-radius:12px;background:#f2f7fd;margin-bottom:4px}
+.ff-todas input{width:22px;height:22px;accent-color:#1e4f86;flex:none}
+.foto-guia{font-size:13px;color:var(--suave);margin:0 0 6px}
+.ff-aviso{display:flex;gap:10px;align-items:flex-start;background:#eef4fc;border-left:4px solid #1e4f86;border-radius:12px;padding:11px 12px;margin:0 0 10px;font-size:14.5px;color:#173c66;line-height:1.35}
+.ff-aviso svg{width:20px;height:20px;flex:none;color:#1e4f86;margin-top:1px}
+.ff.req{border:2px solid #1e4f86;background:#fbfdff}
+.ff.req .ff-cab small{color:#1e4f86;font-weight:700}
+.procesando{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:14px;color:#1e4f86;font-weight:600}
+.procesando i{width:16px;height:16px;border-radius:50%;border:3px solid #b9cbe3;border-top-color:#1e4f86;animation:gira .8s linear infinite}
+@keyframes gira{to{transform:rotate(360deg)}}
+.visor{position:fixed;inset:0;z-index:55;background:#0b0c0e;display:flex;flex-direction:column;color:#fff}
+.visor-bar{display:flex;align-items:center;gap:8px;padding:calc(6px + var(--safe-t)) 8px 6px}
+.visor-bar .tx{flex:1;min-width:0;line-height:1.2}
+.visor-bar .tx b{display:block;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.visor-bar .tx small{display:block;font-size:12.5px;color:#aeb5bd}
+.visor-bar .quitar{border:0;background:#3a1418;color:#fca5a5;font-weight:700;border-radius:10px;padding:10px 12px;font-size:14px}
+.visor-bar .cambiar{display:inline-flex;align-items:center;gap:6px;border:0;background:#1e4f86;color:#fff;font-weight:700;border-radius:10px;padding:10px 12px;font-size:14px;white-space:nowrap}
+.visor-bar .cambiar svg{width:18px;height:18px}
+.visor-nota{margin:0 12px 8px;padding:9px 12px;border-radius:10px;background:#16243a;color:#c9dbf2;font-size:13px;line-height:1.35}
+.visor-cuerpo{flex:1;display:grid;place-items:center;overflow:auto;padding:8px 8px calc(12px + var(--safe-b))}
+.visor-cuerpo img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px;touch-action:pinch-zoom}
+.visor-cuerpo .msg{color:#cfd4da;text-align:center;font-size:15px;padding:24px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media (min-width:700px){.app{box-shadow:0 0 0 1px var(--linea)}}
 </style>
@@ -469,6 +528,9 @@ body.con-pie .inst,body:has(.hoja:not(.cerrada)) .inst{display:none}
 <div class="hoja cerrada" id="hoja" role="dialog" aria-modal="true" aria-labelledby="hojaTit"></div>
 <div id="dlg"></div>
 <div class="inst oculto" id="inst" role="region" aria-label="Instalar Mi Ruta"></div>
+<div class="visor oculto" id="visor" role="dialog" aria-modal="true" aria-label="Foto de la guía"></div>
+<input type="file" id="camara" accept="image/*" capture="environment" class="oculto" aria-hidden="true" tabindex="-1">
+<input type="file" id="galeria" accept="image/*" class="oculto" aria-hidden="true" tabindex="-1">
 <div class="toast oculto" id="toast" role="status"><span id="toastTxt"></span><button id="toastBtn" class="oculto">Deshacer</button></div>
 
 <script>
@@ -481,7 +543,7 @@ body.con-pie .inst,body:has(.hoja:not(.cerrada)) .inst{display:none}
    Sin señal no se pierde nada: los cambios esperan en el celular y se
    envían solos al volver la conexión.
    ===================================================================== */
-const APP_VERSION='2026-10-22 · ruta-15';
+const APP_VERSION='2026-10-24 · ruta-20';
 const NUBE_URL_DEFECTO='https://script.google.com/macros/s/AKfycbzPfXZFs9GVEfBfDERzGGzxO8OgoRaMOHIg_QO9jOpMP31BkvENFenAP9rubgh_GPcW4Q/exec';
 const LOGO='data:image/png;base64,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';
 /* símbolo de Mi Ruta: camino con paradas 1, 2 y 3 (propuesta A) */
@@ -527,7 +589,9 @@ let datos=leer(K.cache,null);       // respuesta de estadoRuta
 let cola=leer(K.cola,[]);           // cambios por enviar
 let srv={};                         // clave -> estado vigente en el servidor
 let usuarioEscrito='', ultimoError='', filtro='pend', enviando=false, ultimaCarga=0, ultimaPos=null, menuAbierto=false;
+let fotoCola=[], subiendo=false;    // fotos por subir (el archivo vive en IndexedDB)
 if(datos)indexarServidor(datos.estados||[]);
+function pendientes(){return cola.length+fotoCola.length;}
 
 /* ---------- utilidades ---------- */
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
@@ -729,6 +793,11 @@ function autoOrden(prog,u,peds,ts){
 }
 function registrar(prog,u,peds,estado,motivo,detalle,conDeshacer){
   if(!puedoEditar(u)){toast('Esta ruta es de otro equipo: solo puedes verla.',true);return;}
+  /* foto obligatoria: Terminado y Entrega parcial solo con la foto de la guía firmada */
+  if(sinFotoPara(prog,peds,estado).length){
+    const s=paradasDe(prog,u).find(x=>x.peds.some(p=>peds.includes(p)));
+    if(s){abrirFotos(prog,u,s,{peds,estado,motivo:motivo||'',detalle:detalle||''});return;}
+  }
   const ts=Date.now();const antes=[];
   if(estado!=='EN RUTA')autoOrden(prog,u,peds,ts);
   peds.forEach(p=>{
@@ -778,6 +847,405 @@ function quitarNovedad(prog,u,s,inc){
   const p0=s.peds[0];
   cola.push(Object.assign(datosCambio(prog,u,p0,Date.now()),{soloOrden:true,borrarInc:inc.id}));
   guardar(K.cola,cola);pintar();programarEnvio(250);toast('Novedad quitada');
+}
+
+/* =====================================================================
+   FOTOS DE LA GUÍA FIRMADA
+   · La cámara abre directo (o la galería). El celular reduce la foto a
+     unos 200-400 KB y le agrega abajo un sello: factura, cliente, fecha,
+     hora, placa, ruta, ubicación y usuario. La firma no queda tapada.
+   · La foto espera en el celular (IndexedDB) y se sube sola, una a una,
+     aunque se cierre la app o no haya señal. En el servidor va a Drive y en
+     la factura solo queda su ID.
+   · Una misma foto puede servir para varias facturas de la parada.
+   ===================================================================== */
+const FOTO_LADO=1600, FOTO_MAX=420*1024;
+/* señal débil: si una foto no logra subir, se vuelve a comprimir más liviana.
+   Nivel 1 tras 2 intentos fallidos (~150 KB), nivel 2 tras 4 (~85 KB). La guía sigue legible. */
+const FOTO_NIVELES=[null,{tras:2,lado:1100,max:150*1024},{tras:4,lado:850,max:85*1024}];
+const NECESITA_FOTO={'TERMINADO':1,'ENTREGA PARCIAL':1};
+const fotoMiniUrl={}, fotoVista={}, fotoVistaOrden=[];
+let fdbP=null, sinIDB=false, fotoDestino=null, fotoProcesando=false, tFotos=null, visorCtx=null;
+
+/* ---- almacén del celular para las fotos pendientes ---- */
+function fdb(){
+  if(fdbP)return fdbP;
+  fdbP=new Promise((res,rej)=>{
+    if(!window.indexedDB)return rej(new Error('sin IndexedDB'));
+    const r=indexedDB.open('miruta_fotos',1);
+    r.onupgradeneeded=()=>{if(!r.result.objectStoreNames.contains('fotos'))r.result.createObjectStore('fotos',{keyPath:'cid'});};
+    r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error||new Error('IndexedDB'));
+  });
+  return fdbP;
+}
+function fdbTx(modo,fn){
+  return fdb().then(db=>new Promise((res,rej)=>{
+    const tx=db.transaction('fotos',modo);let out;
+    const q=fn(tx.objectStore('fotos'));if(q)q.onsuccess=()=>{out=q.result;};
+    tx.oncomplete=()=>res(out);tx.onerror=tx.onabort=()=>rej(tx.error||new Error('no se pudo guardar en el celular'));
+  }));
+}
+async function cargarFotosCola(){
+  try{const l=await fdbTx('readonly',st=>st.getAll());
+    fotoCola=(l||[]).filter(f=>f&&f.blob&&Array.isArray(f.claves)).sort((a,b)=>a.ts-b.ts);}
+  catch(e){sinIDB=true;}
+  if(ses&&fotoCola.length){pintar();programarFotos(800);}
+}
+async function sacarDeCola(f){
+  fotoCola=fotoCola.filter(x=>x.cid!==f.cid);soltarMini(f.cid);
+  try{await fdbTx('readwrite',st=>st.delete(f.cid));}catch(e){}
+}
+function miniUrl(cid){
+  if(fotoMiniUrl[cid])return fotoMiniUrl[cid];
+  const f=fotoCola.find(x=>x.cid===cid);if(!f)return '';
+  return fotoMiniUrl[cid]=URL.createObjectURL(f.blob);
+}
+function soltarMini(cid){if(fotoMiniUrl[cid]){URL.revokeObjectURL(fotoMiniUrl[cid]);delete fotoMiniUrl[cid];}}
+/* imágenes ya vistas (las del servidor): se guardan unas pocas en memoria */
+function guardarVista(id,url){
+  if(fotoVista[id])return;
+  fotoVista[id]=url;fotoVistaOrden.push(id);
+  while(fotoVistaOrden.length>16){const v=fotoVistaOrden.shift();if(String(fotoVista[v]).startsWith('blob:'))URL.revokeObjectURL(fotoVista[v]);delete fotoVista[v];}
+}
+
+/* ---- qué fotos tiene cada factura (servidor + las que esperan en el celular) ---- */
+function fotosDe(clave){
+  const s=srv[clave];
+  /* una foto que se está cambiando ya no se muestra: la reemplaza la nueva que espera en el celular */
+  const cambiadas=new Set();fotoCola.forEach(f=>{if(f.reemplaza)cambiadas.add(f.reemplaza);if(f.reemplazaCid)cambiadas.add(f.reemplazaCid);});
+  const out=((s&&s.fotos)||[]).filter(f=>!cambiadas.has(f.id)).map(f=>({id:f.id,ts:+f.ts||0,usuario:f.usuario||'',pend:false}));
+  fotoCola.forEach(f=>{if(f.claves.includes(clave)&&!cambiadas.has(f.cid))out.push({cid:f.cid,ts:f.ts,usuario:f.usuario||'',pend:true});});
+  return out.sort((a,b)=>a.ts-b.ts);
+}
+function fotosDePeds(prog,peds){
+  if(!prog)return [];
+  const vistos=new Set(),out=[];
+  peds.forEach(p=>fotosDe(claveDe(prog.prog,p)).forEach(f=>{const k=f.id||f.cid;if(!vistos.has(k)){vistos.add(k);out.push(f);}}));
+  return out.sort((a,b)=>a.ts-b.ts);
+}
+function fotosParada(prog,s){return fotosDePeds(prog,s.peds);}
+/* facturas entregadas (total o parcial) que todavía no tienen foto */
+function faltanFotos(prog,s){
+  if(!prog)return [];
+  return s.peds.filter((p,i)=>NECESITA_FOTO[s.est[i].estado]&&!fotosDe(claveDe(prog.prog,p)).length);
+}
+/* facturas entregadas de la parada para las que esta foto es la única: quitarla las dejaría sin evidencia */
+function unicaEn(prog,s,f){
+  const k=f.id||f.cid;
+  return s.peds.filter((p,i)=>{const fs=fotosDe(claveDe(prog.prog,p));
+    return NECESITA_FOTO[s.est[i].estado]&&fs.length===1&&(fs[0].id||fs[0].cid)===k;});
+}
+/* la foto es obligatoria para choferes y auxiliares; el supervisor (admin/editor) puede corregir sin ella */
+function fotoObligatoria(){return permiso()!=='todo';}
+function sinFotoPara(prog,peds,estado){
+  if(!fotoObligatoria()||!NECESITA_FOTO[estado]||!prog)return [];
+  return peds.filter(p=>!fotosDe(claveDe(prog.prog,p)).length);
+}
+/* con la hoja de fotos abierta por una entrega pendiente: si ya están todas las fotos, se marca */
+function revisarPendiente(){
+  const h=hojaCtx;if(!h||h.modo!=='foto'||!h.pend)return;
+  if(sinFotoPara(h.prog,h.pend.peds,h.pend.estado).length)return;
+  const a=h.pend,prog=h.prog,u=h.u;h.pend=null;
+  cerrarHoja();vibrar([18,40,18]);
+  registrar(prog,u,a.peds,a.estado,a.motivo,a.detalle,true);
+}
+function fotoBadge(prog,p,estado){
+  if(!prog)return '';
+  const f=fotosDe(claveDe(prog.prog,p));
+  if(f.length){const pend=f.some(x=>x.pend);
+    return `<span class="fb ${pend?'pend':'ok'}" title="${pend?'Foto por enviar':'Foto de la guía guardada'}">${SVG.camara}${f.length}</span>`;}
+  return NECESITA_FOTO[estado]?`<span class="fb falta" title="Falta la foto de la guía firmada">${SVG.camara}Sin foto</span>`:'';
+}
+function fechaHoraLima(ms){
+  return new Date(ms).toLocaleString('es-PE',{timeZone:'America/Lima',day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',hour12:false}).replace(',','');
+}
+
+/* ---- tomar la foto ---- */
+function pedirFoto(prog,u,s,peds,deGaleria,reemplaza){
+  if(!puedoEditar(u)){toast('Esta ruta es de otro equipo: solo puedes verla.',true);return;}
+  fotoDestino={prog,u,s,peds,reemplaza:reemplaza||null};
+  ubicar();                                   // para que el sello lleve la ubicación
+  const inp=document.getElementById(deGaleria?'galeria':'camara');
+  inp.value='';inp.click();
+}
+['camara','galeria'].forEach(id=>document.getElementById(id).addEventListener('change',async ev=>{
+  const file=ev.target.files&&ev.target.files[0],dest=fotoDestino;
+  fotoDestino=null;
+  if(!file||!dest)return;
+  fotoProcesando=true;refrescarHojaFoto();
+  try{await guardarFoto(dest,file);}
+  catch(e){toast('No se pudo preparar la foto: '+e.message,true);}
+  finally{fotoProcesando=false;ev.target.value='';refrescarHojaFoto();}
+}));
+async function guardarFoto(dest,file){
+  const {prog,u,peds}=dest,ts=Date.now();
+  const pos=ultimaPos&&ts-ultimaPos.t<600000?ultimaPos:null;
+  const blob=await prepararFoto(file,{
+    l1:peds.map(p=>p.FACTURA||'Sin número').join(' · ')+'   '+String(peds[0].CLIENTES||'').trim(),
+    l2:fechaHoraLima(ts)+'  ·  '+(u.placa||'')+(u.ruta?' · Ruta '+u.ruta:'')+(pos?'  ·  '+pos.lat.toFixed(5)+', '+pos.lng.toFixed(5):'')+'  ·  '+(ses&&ses.usuario||'')
+  });
+  const f={cid:'f'+nuevoId(),prog:prog.prog,fechaDia:prog.fechaDia,placa:u.placa,
+    claves:peds.map(p=>claveDe(prog.prog,p)),facturas:peds.map(p=>({factura:p.FACTURA||'',pedidoId:p.id})),
+    cliente:peds[0].CLIENTES||'',ts,blob,usuario:ses&&ses.usuario,lat:pos?pos.lat:null,lng:pos?pos.lng:null};
+  /* "Cambiar foto": la vieja se desvincula en el servidor recién cuando la nueva ya está guardada */
+  const vieja=dest.reemplaza;
+  if(vieja){
+    if(!vieja.pend)f.reemplaza=vieja.id;
+    else{
+      const it=fotoCola.find(x=>x.cid===vieja.cid);
+      if(it&&subiendo&&fotoCola[0]===it)f.reemplazaCid=it.cid;     // se está enviando: se cambia al terminar
+      else if(it)await sacarDeCola(it);
+    }
+  }
+  try{await fdbTx('readwrite',st=>st.put(f));}catch(e){sinIDB=true;}
+  fotoCola.push(f);
+  vibrar([14,30,14]);pintar();programarFotos(200);
+  if(vieja){refrescarHojaFoto();toast('Foto cambiada'+(navigator.onLine===false?': se envía sola al volver la señal':''));return;}
+  if(hojaCtx&&hojaCtx.pend){revisarPendiente();if(!hojaCtx||!hojaCtx.pend)return;}
+  toast(sinIDB?'Foto lista. No cierres la app hasta que se envíe.'
+    :navigator.onLine===false?'Foto guardada en el celular: se envía sola al volver la señal':'Foto guardada · enviándose');
+}
+/* reduce la foto y le agrega el sello; la orientación del celular se respeta */
+async function prepararFoto(file,sello){
+  let src=null,w=0,h=0,cerrar=()=>{};
+  try{
+    if(window.createImageBitmap){const bm=await createImageBitmap(file,{imageOrientation:'from-image'});src=bm;w=bm.width;h=bm.height;cerrar=()=>{try{bm.close();}catch(e){}};}
+  }catch(e){src=null;}
+  if(!src){
+    const url=URL.createObjectURL(file);
+    src=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=()=>rej(new Error('el celular no pudo leer la imagen'));i.src=url;});
+    w=src.naturalWidth;h=src.naturalHeight;cerrar=()=>URL.revokeObjectURL(url);
+  }
+  if(!w||!h){cerrar();throw new Error('la imagen está vacía');}
+  try{await document.fonts.load('700 20px Barlow');}catch(e){}
+  try{
+    let lado=FOTO_LADO,q=0.8;
+    for(let intento=0;intento<7;intento++){
+      const k=Math.min(1,lado/Math.max(w,h));
+      const cv=dibujarSello(src,Math.round(w*k),Math.round(h*k),sello);
+      const b=await new Promise(r=>cv.toBlob(r,'image/jpeg',q));
+      cv.width=cv.height=0;                       // libera memoria en celulares modestos
+      if(!b)throw new Error('no se pudo comprimir');
+      if(b.size<=FOTO_MAX||intento===6)return b;
+      if(q>0.61)q-=0.1;else lado=Math.round(lado*0.82);
+    }
+  }finally{cerrar();}
+}
+function dibujarSello(src,W,H,sello){
+  const banda=Math.round(Math.max(64,W*0.075));
+  const cv=document.createElement('canvas');cv.width=W;cv.height=H+banda;
+  const cx=cv.getContext('2d');
+  cx.fillStyle='#fff';cx.fillRect(0,0,W,H);cx.drawImage(src,0,0,W,H);
+  cx.fillStyle='#1a1a1a';cx.fillRect(0,H,W,banda);
+  cx.fillStyle='#E1001A';cx.fillRect(0,H,W,Math.max(3,Math.round(banda*0.07)));
+  const pad=Math.round(banda*0.22),f1=Math.round(banda*0.3),f2=Math.round(banda*0.235);
+  cx.textBaseline='alphabetic';
+  cx.fillStyle='#fff';cx.font=`700 ${f1}px Barlow, Roboto, Arial, sans-serif`;
+  cx.fillText(cortarTexto(cx,'GUÍA FIRMADA · '+sello.l1,W-pad*2),pad,H+Math.round(banda*0.5));
+  cx.fillStyle='#c9ced5';cx.font=`500 ${f2}px Barlow, Roboto, Arial, sans-serif`;
+  cx.fillText(cortarTexto(cx,sello.l2,W-pad*2),pad,H+Math.round(banda*0.84));
+  return cv;
+}
+function cortarTexto(cx,t,max){
+  if(cx.measureText(t).width<=max)return t;
+  while(t.length>1&&cx.measureText(t+'…').width>max)t=t.slice(0,-1);
+  return t+'…';
+}
+
+/* ---- subida: una foto a la vez, con reintento solo ---- */
+function programarFotos(ms){clearTimeout(tFotos);tFotos=setTimeout(subirFotos,ms);}
+function blobAData(b){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=()=>rej(new Error('no se pudo leer la foto guardada'));r.readAsDataURL(b);});}
+async function subirFotos(){
+  if(subiendo||!fotoCola.length||!ses)return;
+  subiendo=true;pintarSync();
+  const f=fotoCola[0];
+  try{
+    const r=await pedir({accion:'fotoSubir',cid:f.cid,prog:f.prog,facturas:f.facturas,ts:f.ts,lat:f.lat,lng:f.lng,
+      reemplaza:f.reemplaza||'',foto:{datos:await blobAData(f.blob)}},90000);
+    if(!r.ok){
+      if(esAuth(r.error)){subiendo=false;cerrarSesion('Tu sesión ya no es válida. Ingresa de nuevo: las fotos pendientes se conservan.');return;}
+      if(!r.definitivo)throw new Error(r.error||'respuesta inválida');
+      await sacarDeCola(f);
+      toast('Una foto no se guardó: '+r.error,true);
+      if(r.ajeno)setTimeout(()=>cargar(null,true),200);
+    }else{
+      /* la vista previa del celular sirve para ver la foto ya subida sin descargarla */
+      if(r.id&&fotoMiniUrl[f.cid]){guardarVista(r.id,fotoMiniUrl[f.cid]);delete fotoMiniUrl[f.cid];}
+      (r.estados||[]).forEach(mezclarServidor);
+      await sacarDeCola(f);
+      /* si mientras subía la cambiaron por otra, la nueva la reemplaza en el servidor */
+      for(const x of fotoCola)if(x.reemplazaCid===f.cid&&r.id){x.reemplaza=r.id;delete x.reemplazaCid;try{await fdbTx('readwrite',st=>st.put(x));}catch(e){}}
+    }
+    subiendo=false;pintar();refrescarHojaFoto();
+    if(fotoCola.length)programarFotos(400);
+  }catch(e){
+    subiendo=false;pintarSync(e.message);
+    let espera=25000;
+    /* solo cuenta como señal débil si el celular tiene red pero el envío no llegó a tiempo o se cortó */
+    if(navigator.onLine!==false&&/no respondió a tiempo|sin conexión|respondió 5\d\d/i.test(e.message)&&fotoCola.includes(f)){
+      f.fallos=(f.fallos||0)+1;
+      let nivel=f.nivel||0;
+      for(let n=1;n<FOTO_NIVELES.length;n++)if(f.fallos>=FOTO_NIVELES[n].tras)nivel=n;
+      if(nivel>(f.nivel||0)){
+        try{
+          const b=await reducirFoto(f.blob,FOTO_NIVELES[nivel]);
+          if(b&&b.size<f.blob.size){f.blob=b;soltarMini(f.cid);}
+          f.nivel=nivel;espera=2500;                 // reintenta enseguida, ya más liviana
+        }catch(e2){}
+      }
+      try{await fdbTx('readwrite',st=>st.put(f));}catch(e3){}
+    }
+    refrescarHojaFoto();
+    programarFotos(espera);
+  }
+}
+/* vuelve a comprimir una foto ya sellada (el sello va en la imagen, así que se conserva) */
+async function reducirFoto(blob,{lado,max}){
+  let src=null,w=0,h=0,cerrar=()=>{};
+  try{if(window.createImageBitmap){const bm=await createImageBitmap(blob);src=bm;w=bm.width;h=bm.height;cerrar=()=>{try{bm.close();}catch(e){}};}}catch(e){src=null;}
+  if(!src){
+    const url=URL.createObjectURL(blob);
+    src=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=()=>rej(new Error('no se pudo leer'));i.src=url;});
+    w=src.naturalWidth;h=src.naturalHeight;cerrar=()=>URL.revokeObjectURL(url);
+  }
+  try{
+    let L=lado,q=0.72,mejor=null;
+    for(let intento=0;intento<7;intento++){
+      const k=Math.min(1,L/Math.max(w,h)),W=Math.round(w*k),H=Math.round(h*k);
+      const cv=document.createElement('canvas');cv.width=W;cv.height=H;
+      cv.getContext('2d').drawImage(src,0,0,W,H);
+      const b=await new Promise(r=>cv.toBlob(r,'image/jpeg',q));
+      cv.width=cv.height=0;
+      if(b&&(!mejor||b.size<mejor.size))mejor=b;
+      if(b&&b.size<=max)return b;
+      if(q>0.53)q-=0.1;else L=Math.round(L*0.85);
+    }
+    return mejor;
+  }finally{cerrar();}
+}
+
+/* ---- hoja inferior: fotos de una parada ---- */
+function abrirFotos(prog,u,s,pend){
+  const yaAbierta=!!hojaCtx;
+  hojaCtx={modo:'foto',prog,u,s,todas:false,pend:pend||null};
+  if(pend)document.getElementById('toast').classList.add('oculto');   // que no tape los botones
+  pintarHoja();
+  if(!yaAbierta){
+    history.pushState({hoja:1},'');
+    document.getElementById('velo').classList.add('on');
+    requestAnimationFrame(()=>document.getElementById('hoja').classList.remove('cerrada'));
+  }
+}
+function refrescarHojaFoto(){if(hojaCtx&&hojaCtx.modo==='foto')pintarHoja();}
+function miniatura(f){
+  const src=f.pend?miniUrl(f.cid):fotoVista[f.id];
+  const k=esc(f.id||f.cid);
+  return `<button class="mini" data-ver="${k}" aria-label="Ver la foto de las ${esc(horaLima(f.ts))}${f.pend?', por enviar':''}">
+    ${src?`<img src="${src}" alt="">`:`<span class="ok-ic">${SVG.fotoOk}Guardada</span>`}
+    ${f.pend?'<span class="p" title="Por enviar"></span>':''}<span class="h">${esc(horaLima(f.ts))}</span></button>`;
+}
+function pintarHojaFoto(){
+  const h=hojaCtx,el=document.getElementById('hoja');
+  const s=paradasDe(h.prog,h.u).find(x=>x.key===h.s.key)||h.s;h.s=s;
+  const faltaConf=h.pend?sinFotoPara(h.prog,h.pend.peds,h.pend.estado):[];
+  const varias=s.peds.length>1;
+  const grupos=h.todas||!varias?[s.peds]:s.peds.map(p=>[p]);
+  const filas=grupos.map((peds,gi)=>{
+    const fs=fotosDePeds(h.prog,peds);
+    const est=peds.length>1?s.estado:s.est[s.peds.indexOf(peds[0])].estado;
+    const nombre=peds.length>1?plural(peds.length,'factura')+': '+peds.map(p=>p.FACTURA||'sin número').join(', '):(peds[0].FACTURA||'Sin número de factura');
+    const requerida=h.pend&&peds.some(p=>faltaConf.includes(p));
+    return `<div class="ff${requerida?' req':''}"><div class="ff-cab"><b>${esc(nombre)}<small>${fs.length?plural(fs.length,'foto'):requerida?'Falta la foto para confirmar':NECESITA_FOTO[est]?'Falta la foto':'Sin foto todavía'}</small></b>${estHtml(est)}</div>
+      ${fs.length?`<div class="miniaturas">${fs.map(miniatura).join('')}</div>`:''}
+      <div class="cam-acc"><button class="btn cam" data-cam="${gi}" ${fotoProcesando?'disabled':''}>${SVG.camara}${fs.length?'Otra foto':'Tomar foto'}</button>
+      <button class="btn gal" data-gal="${gi}" aria-label="Elegir de la galería" ${fotoProcesando?'disabled':''}>${SVG.galeria}</button></div></div>`;
+  }).join('');
+  const pend=fotosParada(h.prog,s).filter(f=>f.pend).length;
+  el.innerHTML=`<div class="hoja-top"><button type="button" class="asa-btn" data-cerrar aria-label="Cerrar (o desliza hacia abajo)"><span class="asa"></span></button><button type="button" class="hoja-x" data-cerrar aria-label="Cerrar">✕</button></div><h3 id="hojaTit">${h.pend?'Foto para confirmar la entrega':'Foto de la guía firmada'}</h3>
+    <div class="sub">${esc(titulo(s.peds[0].CLIENTES))} · parada ${s.orden||s.n}</div>
+    ${h.pend?`<div class="ff-aviso">${SVG.candado}<span>Para marcar <b>${esc(TXT_EST[h.pend.estado].toLowerCase())}</b> toma la foto de la guía firmada de ${faltaConf.length>1?'las facturas <b>'+esc(faltaConf.map(p=>p.FACTURA||'sin número').join(', '))+'</b>':'la factura <b>'+esc(faltaConf.map(p=>p.FACTURA||'sin número').join(''))+'</b>'}. Se marca sola al guardar la foto.</span></div>`:''}
+    <p class="foto-guia">Que se lean la firma, el sello y la fecha del cliente. Si el cliente no firma, toma la foto igual y registra una novedad. La foto se envía sola; sin señal espera en el celular.</p>
+    ${varias?`<label class="ff-todas"><input type="checkbox" id="fTodas" ${h.todas?'checked':''}> Una sola guía para las ${s.peds.length} facturas</label>`:''}
+    ${filas}
+    ${fotoProcesando?'<div class="procesando"><i></i>Preparando la foto…</div>':subiendo&&pend?'<div class="procesando"><i></i>Subiendo…</div>':''}
+    <button class="btn-sec" id="hNo">${h.pend?'Cancelar':'Listo'}</button>`;
+  const ft=document.getElementById('fTodas');if(ft)ft.onchange=()=>{h.todas=ft.checked;pintarHoja();};
+  el.querySelectorAll('[data-cam]').forEach(b=>b.onclick=()=>{vibrar(8);pedirFoto(h.prog,h.u,s,grupos[+b.dataset.cam],false);});
+  el.querySelectorAll('[data-gal]').forEach(b=>b.onclick=()=>pedirFoto(h.prog,h.u,s,grupos[+b.dataset.gal],true));
+  el.querySelectorAll('[data-ver]').forEach(b=>b.onclick=()=>{
+    const f=fotosParada(h.prog,s).find(x=>(x.id||x.cid)===b.dataset.ver);if(f)abrirVisor(f,{prog:h.prog,u:h.u,s});});
+  document.getElementById('hNo').onclick=()=>cerrarHoja();
+}
+
+/* ---- visor a pantalla completa ---- */
+function abrirVisor(foto,ctx){
+  visorCtx={foto,ctx,error:''};
+  history.pushState({visor:1},'');
+  document.getElementById('visor').classList.remove('oculto');
+  pintarVisor();
+  if(foto.id&&!fotoVista[foto.id])cargarVista(foto.id);
+}
+async function cargarVista(id){
+  try{
+    const r=await pedir({accion:'fotoVer',id},45000);
+    if(!r.ok)throw new Error(r.error||'no disponible');
+    guardarVista(id,'data:'+r.mime+';base64,'+r.datos);
+  }catch(e){if(visorCtx&&visorCtx.foto.id===id)visorCtx.error=e.message;}
+  if(visorCtx&&visorCtx.foto.id===id)pintarVisor();
+  refrescarHojaFoto();
+}
+function pintarVisor(){
+  const c=visorCtx,v=document.getElementById('visor');if(!c)return;
+  const f=c.foto,s=c.ctx.s;
+  const src=f.pend?miniUrl(f.cid):fotoVista[f.id];
+  const yo=String(ses&&ses.usuario||'').toLowerCase();
+  const puede=puedoEditar(c.ctx.u)&&(permiso()==='todo'||String(f.usuario||'').toLowerCase()===yo);
+  const sAct=paradasDe(c.ctx.prog,c.ctx.u).find(x=>x.key===s.key)||s;
+  const unica=fotoObligatoria()?unicaEn(c.ctx.prog,sAct,f):[];
+  const facs=s.peds.filter(p=>fotosDe(claveDe(c.ctx.prog.prog,p)).some(x=>(x.id||x.cid)===(f.id||f.cid))).map(p=>p.FACTURA||'sin número');
+  v.innerHTML=`<div class="visor-bar"><button class="ib" id="vCerrar" aria-label="Cerrar">${SVG.atras}</button>
+    <div class="tx"><b>${esc(titulo(s.peds[0].CLIENTES))}</b><small>${esc(facs.join(', '))} · ${esc(horaLima(f.ts))}${f.usuario?' · '+esc(f.usuario):''}${f.pend?' · por enviar':''}</small></div>
+    ${puede?`<button class="cambiar" id="vCambiar">${SVG.camara}Cambiar</button>${unica.length?'':'<button class="quitar" id="vQuitar">Quitar</button>'}`:''}</div>
+    ${puede&&unica.length?`<p class="visor-nota">Es la única foto de ${unica.length>1?'las facturas entregadas':'una factura entregada'}: si salió mal, cámbiala por otra. No se puede dejar sin foto.</p>`:''}
+    <div class="visor-cuerpo">${src?`<img src="${src}" alt="Foto de la guía firmada">`
+      :c.error?`<div class="msg">No se pudo cargar la foto.<br>${esc(c.error)}</div>`
+      :'<div class="msg"><span class="procesando" style="color:#cfd4da;justify-content:center"><i></i>Cargando la foto…</span></div>'}</div>`;
+  document.getElementById('vCerrar').onclick=()=>cerrarVisor();
+  const q=document.getElementById('vQuitar');if(q)q.onclick=quitarFoto;
+  const cb=document.getElementById('vCambiar');if(cb)cb.onclick=cambiarFoto;
+}
+function cerrarVisor(desdePop){
+  if(!visorCtx)return;
+  visorCtx=null;
+  const v=document.getElementById('visor');v.classList.add('oculto');v.innerHTML='';
+  if(!desdePop){saltarPop++;history.back();}
+}
+/* toma una foto nueva para las mismas facturas; la vieja se reemplaza al guardarla */
+function cambiarFoto(){
+  const c=visorCtx;if(!c)return;const f=c.foto,k=f.id||f.cid;
+  const s=paradasDe(c.ctx.prog,c.ctx.u).find(x=>x.key===c.ctx.s.key)||c.ctx.s;
+  const peds=s.peds.filter(p=>fotosDe(claveDe(c.ctx.prog.prog,p)).some(x=>(x.id||x.cid)===k));
+  if(!peds.length){cerrarVisor();return;}
+  vibrar(8);
+  pedirFoto(c.ctx.prog,c.ctx.u,s,peds,false,f.pend?{pend:true,cid:f.cid}:{pend:false,id:f.id});   // abre la cámara (mismo toque)
+  cerrarVisor();
+}
+async function quitarFoto(){
+  const c=visorCtx;if(!c)return;const f=c.foto;
+  {const sAct=paradasDe(c.ctx.prog,c.ctx.u).find(x=>x.key===c.ctx.s.key)||c.ctx.s;
+   if(fotoObligatoria()&&unicaEn(c.ctx.prog,sAct,f).length){toast('Es la única foto de una factura entregada: cámbiala por otra.',true);return;}}
+  const ok=await dialogo('¿Quitar esta foto?',f.pend?'Todavía no se envió: se borra de este celular.':'Dejará de verse en la factura. En Drive queda guardada como respaldo.','Quitar','Dejarla');
+  if(!ok||!visorCtx)return;
+  if(f.pend){
+    const it=fotoCola.find(x=>x.cid===f.cid);if(it)await sacarDeCola(it);
+    cerrarVisor();pintar();refrescarHojaFoto();toast('Foto quitada');return;
+  }
+  try{
+    const r=await pedir({accion:'fotoQuitar',id:f.id,prog:c.ctx.prog.prog},30000);
+    if(!r.ok)throw new Error(r.error||'respuesta inválida');
+    (r.estados||[]).forEach(mezclarServidor);
+    cerrarVisor();pintar();refrescarHojaFoto();toast('Foto quitada');
+  }catch(e){toast('No se pudo quitar: '+e.message,true);}
 }
 
 /* ---------- envío (con cola si no hay señal) ---------- */
@@ -839,6 +1307,9 @@ const app=document.getElementById('app');
 const FIRMA='<div class="firma">Elaborado por <b>Walter Malpartida</b> - <span style="white-space:nowrap">Supervisor de Distribución</span></div>';
 const SVG={
   bandera:'<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg>',
+  camara:'<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5A2.5 2.5 0 0 1 5.5 6h1.8l1.4-2h6.6l1.4 2h1.8A2.5 2.5 0 0 1 21 8.5v9a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5z"/><circle cx="12" cy="13" r="3.6"/></svg>',
+  galeria:'<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="9" cy="9.5" r="1.8"/><path d="M21 16l-5-5-8 9"/></svg>',
+  fotoOk:'<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M9.5 14l2 2 4-4.5"/></svg>',
   atras:'<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
   chev:'<svg class="ico chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>',
   chevI:'<svg class="ico chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
@@ -909,6 +1380,7 @@ function volverARaiz(tab){
 window.addEventListener('popstate',()=>{
   if(saltarPop>0){saltarPop--;return;}
   if(dlgAbierto){cerrarDialogo(false,true);return;}
+  if(visorCtx){cerrarVisor(true);return;}
   if(hojaCtx){cerrarHoja(true);return;}
   if(nav.pila.length){
     const top=nav.pila.pop();
@@ -949,19 +1421,19 @@ function barraTabs(){
   const pend=pr&&un?paradasDe(pr,un).filter(s=>!FINAL[s.estado]).length:0;
   const b=(t,ic,txt,badge)=>`<button data-tab="${t}" class="${nav.tab===t?'on':''}" aria-current="${nav.tab===t?'page':'false'}"><span class="pil">${ic}</span>${txt}${badge?`<span class="badge">${badge}</span>`:''}</button>`;
   document.body.classList.add('con-tab');
-  return `<nav class="tabbar" aria-label="Secciones"><div class="tabbar-in">${b('ruta',SVG.ruta,'Mi ruta',pend)}${b('resumen',SVG.resumen,'Resumen',cola.length||'')}${b('mas',SVG.mas,'Más','')}</div></nav>`;
+  return `<nav class="tabbar" aria-label="Secciones"><div class="tabbar-in">${b('ruta',SVG.ruta,'Mi ruta',pend)}${b('resumen',SVG.resumen,'Resumen',pendientes()||'')}${b('mas',SVG.mas,'Más','')}</div></nav>`;
 }
 function enlazarComun(){
   pintarSync();
-  const s=document.getElementById('sync');if(s)s.onclick=()=>{vibrar();enviar();cargar(null,false);};
+  const s=document.getElementById('sync');if(s)s.onclick=()=>{vibrar();enviar();subirFotos();cargar(null,false);};
   const a=document.getElementById('bAtras');if(a)a.onclick=atras;
   app.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{vibrar(8);irTab(b.dataset.tab);});
 }
 function pintarSync(error){
   const b=document.getElementById('sync');if(!b)return;
-  const n=cola.length;
-  b.className='sync'+(enviando?' envia':n&&error?' err':n?' pend':'');
-  b.innerHTML='<i></i>'+(enviando?'Enviando…':n?(error?'Sin señal · '+n:n+' por enviar'):(ultimaCarga?'Al día '+horaLima(ultimaCarga):'Al día'));
+  const n=pendientes();
+  b.className='sync'+(enviando||subiendo?' envia':n&&error?' err':n?' pend':'');
+  b.innerHTML='<i></i>'+(enviando?'Enviando…':subiendo?'Subiendo foto…':n?(error?'Sin señal · '+n:n+' por enviar'):(ultimaCarga?'Al día '+horaLima(ultimaCarga):'Al día'));
   b.title=error?('Último intento: '+error):'Toca para actualizar';
 }
 
@@ -974,7 +1446,7 @@ function pintarLogin(msg){
       <label for="lCla">Contraseña</label><input id="lCla" type="password" autocomplete="current-password">
       <button class="btn-guardar" id="lBtn" type="submit">Ingresar</button>
       ${msg?`<div class="aviso">${esc(msg)}</div>`:''}
-      ${cola.length?`<div class="aviso info">Tienes ${cola.length} cambio(s) guardados en este celular. Se enviarán al ingresar.</div>`:''}
+      ${pendientes()?`<div class="aviso info">Tienes ${cola.length?cola.length+' cambio(s)':''}${cola.length&&fotoCola.length?' y ':''}${fotoCola.length?fotoCola.length+' foto(s)':''} guardados en este celular. Se enviarán al ingresar.</div>`:''}
       <p class="ayuda">Usa el usuario de tu camión. Si no lo tienes, pídeselo al supervisor de despacho.</p>
     </form>${FIRMA}</div>`;
   document.getElementById('fLogin').onsubmit=async ev=>{
@@ -991,7 +1463,7 @@ function pintarLogin(msg){
       if(sel.fechaDia&&sel.fechaDia!==hoyLima())sel={};
       datos=r;ultimaCarga=Date.now();indexarServidor(r.estados);guardar(K.cache,r);sel.fechaDia=r.fechaDia;
       nav={tab:'ruta',pila:[]};
-      elegirAutomatico();ubicar();pintar('fundido');programarEnvio(200);
+      elegirAutomatico();ubicar();pintar('fundido');programarEnvio(200);programarFotos(1500);
     }catch(e){ses=null;pintarLogin('No se pudo conectar: '+e.message+'. Revisa tu señal e inténtalo otra vez.');}
   };
 }
@@ -1132,12 +1604,14 @@ function tarjeta(s,esSig,idx,editable){
   const tipoCls=/PROV/.test(tipo)?'PROVINCIA':/RETIRO|RECOJ/.test(tipo)?'RETIRO':/LOCAL/.test(tipo)?'LOCAL':'';
   const comp=s.peds.reduce((a,p)=>a+(+p.comp||0),0),part=s.peds.reduce((a,p)=>a+(+p.partes||0),0);
   const obs=[...new Set(s.peds.map(p=>String(p.OBSERVACION||'').trim()).filter(Boolean))];
+  const pr=progActual();
+  const sinFoto=faltanFotos(pr,s).length,nFotos=fotosParada(pr,s).length;
   const facs=s.peds.map((p,i)=>{const e=s.est[i];
     return `<${editable?'button':'div'} class="facb" data-par="${idx}" data-fac="${i}"${editable?` aria-label="Cambiar estado de la factura ${esc(p.FACTURA||'sin número')}"`:''}>
       <span class="fac-n">${esc(p.FACTURA||'Sin número de factura')}${e.pend?'<span class="pend-dot" title="Por enviar"></span>':''}
         ${e.estado==='ANULADO'&&e.motivo?`<small style="color:var(--anul)">Motivo: ${esc(e.motivo)}</small>`:''}
         ${e.estado==='ENTREGA PARCIAL'&&e.detalle?`<small style="color:var(--parc)">Rechazado: ${esc(e.detalle)}</small>`:''}</span>
-      ${estHtml(e.estado)}${editable?'<span class="flecha" aria-hidden="true">›</span></button>':'</div>'}`;}).join('');
+      ${fotoBadge(pr,p,e.estado)}${estHtml(e.estado)}${editable?'<span class="flecha" aria-hidden="true">›</span></button>':'</div>'}`;}).join('');
   const porHora=(x,y)=>horaCorta(x).localeCompare(horaCorta(y));
   const lleg=s.est.map(e=>e.horaLlegada).filter(Boolean).sort(porHora)[0];
   const fin=s.est.map(e=>e.horaFin).filter(Boolean).sort(porHora).slice(-1)[0];
@@ -1153,12 +1627,16 @@ function tarjeta(s,esSig,idx,editable){
       <span class="nov-ic">${ICO_NOV[novInfo(n.tipo).i]}</span><span class="nov-tx"><b>${esc(novInfo(n.tipo).l)}</b>
       <small>${esc(n.detalle)}</small><em>${n.minutos?`<span class="nov-min-c">${n.minutos} min de espera</span>`:''}${esc(horaCorta(n.hora))}${n.nombre?' · '+esc(titulo(String(n.nombre).split(/\s+/).slice(0,2).join(' '))):''}${n.pend?' · por enviar':''}</em></span>${n.pend?'<span class="pend-dot" title="Por enviar"></span>':''}</${editable&&mia?'button':'div'}>`;}).join('')}</div>`:'';
   const btnNov=editable?`<button class="nov-btn" data-nov="${idx}" aria-label="Registrar una novedad en esta parada">${SVG.bandera}<span>Novedad</span>${novs.length?`<i>${novs.length}</i>`:''}</button>`:'';
+  const btnFoto=editable?`<button class="nov-btn foto-btn${sinFoto?' falta':''}" data-foto="${idx}" aria-label="Fotos de la guía firmada">${SVG.camara}<span>Foto</span>${nFotos?`<i>${nFotos}</i>`:''}</button>`:'';
+  const btnsPie=btnNov||btnFoto?`<span class="t-acc-btns">${btnFoto}${btnNov}</span>`:'';
   const hayRuta=s.est.some(e=>e.estado==='EN RUTA');
   const hayProc=s.est.some(e=>e.estado==='EN PROCESO');
   let acc='';
   if(!final&&editable){
     if(hayProc)acc=`<div class="acc">${btnMapa(p0,false)}<button class="btn entregado" data-entregado="${esc(s.key)}">${SVG.check}Entregado completo</button></div>`;
     else if(hayRuta)acc=`<div class="acc">${btnMapa(p0,false)}<button class="btn llegue" data-llegue="${esc(s.key)}">Llegué al cliente</button></div>`;
+  }else if(final&&editable&&sinFoto){
+    acc=`<div class="acc"><button class="btn foto" data-foto="${idx}">${SVG.camara}Foto de la guía firmada${s.peds.length>1&&sinFoto<s.peds.length?' ('+sinFoto+' sin foto)':''}</button></div>`;
   }
   return `<div class="parada c-${EST[s.estado].cls}${esSig?' siguiente':''}${compacta?' compacta':''}">
     <div class="num${s.orden?'':' sin-orden'}" aria-label="${s.orden?'Orden de visita '+s.orden:'Sin orden de visita, programado '+s.n}">${s.orden||s.n}</div>
@@ -1167,7 +1645,7 @@ function tarjeta(s,esSig,idx,editable){
       <div class="cli">${esc(titulo(p0.CLIENTES)||'Cliente sin nombre')}</div>
       <div class="meta">${esc(titulo(p0.DISTRITO))}${s.orden&&s.orden!==s.n?`<span class="prog-n" title="Orden en que lo programó el supervisor">prog. ${s.n}</span>`:''}${tipoCls?`<span class="ch ${tipoCls}">${esc(titulo(tipoCls))}</span>`:''}${!compacta&&(comp||part)?` · ${comp} compl. + ${part} partes`:''}</div>
       ${!compacta&&obs.length?`<div class="nota">${obs.map(esc).join('<br>')}</div>`:''}
-      <div class="facs">${facs}</div>${novHtml}${horas||btnNov?`<div class="t-pie">${horas||'<span></span>'}${btnNov}</div>`:''}${acc}
+      <div class="facs">${facs}</div>${novHtml}${horas||btnsPie?`<div class="t-pie">${horas||'<span></span>'}${btnsPie}</div>`:''}${acc}
     </div></div>`;
 }
 function btnMapa(p0,corto){
@@ -1184,7 +1662,9 @@ function enlazarAcciones(prog,u,par){
   app.querySelectorAll('[data-entregado]').forEach(b=>b.onclick=()=>{
     const s=deKey(b.dataset.entregado);if(!s)return;
     const peds=s.peds.filter((p,i)=>!FINAL[s.est[i].estado]);
-    vibrar([18,40,18]);registrar(prog,u,peds,'TERMINADO','','',true);});
+    vibrar(sinFotoPara(prog,peds,'TERMINADO').length?10:[18,40,18]);
+    registrar(prog,u,peds,'TERMINADO','','',true);   // sin foto, abre primero la cámara
+  });
 }
 
 /* ---------- RESUMEN del día ---------- */
@@ -1200,6 +1680,15 @@ function pintarResumen(){
   const durs=par.map(s=>{const a=s.est.map(e=>e.horaLlegada).filter(reales).sort()[0],b=s.est.map(e=>e.horaFin).filter(reales).sort().slice(-1)[0];return a&&b&&FINAL[s.estado]?minutos(a,b):null;}).filter(x=>x!=null&&x>=0);
   const prom=durs.length?Math.round(durs.reduce((a,b)=>a+b,0)/durs.length):null;
   const nov=todos.filter(x=>x.e.estado==='ANULADO'||x.e.estado==='ENTREGA PARCIAL');
+  const reqF=todos.filter(x=>NECESITA_FOTO[x.e.estado]);
+  const conF=reqF.filter(x=>fotosDe(claveDe(prog.prog,x.p)).length).length;
+  const fPend=fotoCola.filter(f=>f.prog===prog.prog).length;
+  const sinF=par.filter(s=>faltanFotos(prog,s).length),edit=puedoEditar(u);
+  const fotosSec=`<section class="bloque"><h2>Fotos de guías firmadas</h2><div class="metricas">
+      <div><small>Guías con foto</small><b>${conF} / ${reqF.length}</b></div>
+      <div><small>Fotos por enviar</small><b>${fPend}</b></div></div>
+      ${sinF.map(s=>{const f=faltanFotos(prog,s);const tag=edit?'button':'div';
+        return `<${tag} class="opcion"${edit?` data-rfoto="${par.indexOf(s)}"`:''}><span class="oi" style="background:#fff1e0;color:#9a4a07">${SVG.camara}</span><span class="tx"><b>${esc(titulo(s.peds[0].CLIENTES))}</b><small>${esc(f.map(p=>p.FACTURA||'sin número').join(', '))} · sin foto</small></span>${edit?SVG.chev:''}</${tag}>`;}).join('')}</section>`;
   app.innerHTML=barra({tit:'Resumen del día',sub:esc(u.placa)+' · '+esc(titulo(prog.turnoTxt))})+
     `<main class="pant">
       <section class="res-hero"><div class="anillo" style="--p:${pct}"><b>${pct}%</b></div><div class="tx"><b>${hechas} de ${n}</b><span>facturas atendidas</span><span>${par.filter(s=>FINAL[s.estado]).length} de ${plural(par.length,'parada')}</span></div></section>
@@ -1209,11 +1698,13 @@ function pintarResumen(){
         <div><small>Última entrega</small><b>${fns.length?hhmm(fns[fns.length-1]):'—'}</b></div>
         <div><small>Promedio en el cliente</small><b>${prom!=null?prom+' min':'—'}</b></div>
         <div><small>Paradas pendientes</small><b>${par.filter(s=>!FINAL[s.estado]).length}</b></div></div></section>
+      ${fotosSec}
       <section class="bloque"><h2>Envío al supervisor</h2>
-        <div class="opcion" style="cursor:default"><span class="oi">${SVG.enviar}</span><span class="tx"><b>${cola.length?plural(cola.length,'cambio')+' por enviar':'Todo enviado'}</b><small>${cola.length?'Se envían solos cuando hay señal':'Última actualización '+(ultimaCarga?horaLima(ultimaCarga):'—')}</small></span>${cola.length?'<button class="btn mini osc" id="bEnviar" style="flex:0 0 auto">Enviar</button>':''}</div></section>
+        <div class="opcion" style="cursor:default"><span class="oi">${SVG.enviar}</span><span class="tx"><b>${pendientes()?(cola.length?plural(cola.length,'cambio'):'')+(cola.length&&fotoCola.length?' y ':'')+(fotoCola.length?plural(fotoCola.length,'foto'):'')+' por enviar':'Todo enviado'}</b><small>${pendientes()?'Se envían solos cuando hay señal':'Última actualización '+(ultimaCarga?horaLima(ultimaCarga):'—')}</small></span>${pendientes()?'<button class="btn mini osc" id="bEnviar" style="flex:0 0 auto">Enviar</button>':''}</div></section>
       ${nov.length?`<section class="bloque"><h2>Novedades</h2>${nov.map(x=>`<div class="fac c-${EST[x.e.estado].cls}"><span class="ic-f">${SVG.fac}</span><span class="tx"><b>${esc(titulo(x.p.CLIENTES))}</b><small class="${x.e.estado==='ANULADO'?'mot':'det'}">${esc(x.p.FACTURA||'Sin número')} · ${esc(x.e.estado==='ANULADO'?(x.e.motivo||'Sin motivo'):(x.e.detalle||'Sin detalle'))}</small></span>${estHtml(x.e.estado)}</div>`).join('')}</section>`:''}
       ${FIRMA}</main>`+barraTabs();
-  const be=document.getElementById('bEnviar');if(be)be.onclick=()=>{vibrar();enviar();};
+  const be=document.getElementById('bEnviar');if(be)be.onclick=()=>{vibrar();enviar();subirFotos();};
+  app.querySelectorAll('[data-rfoto]').forEach(b=>b.onclick=()=>{vibrar(8);abrirFotos(prog,u,par[+b.dataset.rfoto]);});
   enlazarComun();
 }
 
@@ -1235,20 +1726,20 @@ function pintarMas(){
       </section>
       <section class="bloque">
         ${instalada()?'':op('mIns',SVG.instalar,'Instalar la app','Para abrirla desde la pantalla de inicio')}
-        ${op('mSal',SVG.salir,'Cerrar sesión',cola.length?plural(cola.length,'cambio')+' por enviar se conservan':'','','peligro')}
+        ${op('mSal',SVG.salir,'Cerrar sesión',pendientes()?plural(pendientes(),'envío')+' pendiente(s) se conservan':'','','peligro')}
       </section>
       <p class="ver">${esc(ses&&ses.usuario||'')} · versión ${esc(APP_VERSION)}</p>${FIRMA}</main>`+(cimaPila()?'':barraTabs());
   document.getElementById('mCam').onclick=()=>irA('camiones');
   document.getElementById('mDia').onchange=e=>{const iso=e.target.value;if(!/^\d{4}-\d{2}-\d{2}$/.test(iso))return;sel.fechaDia=iso;sel.prog=null;guardar(K.sel,sel);datos=null;volverARaiz();cargar(iso,false);};
   const mh=document.getElementById('mHoy');if(mh)mh.onclick=()=>{const iso=hoyLima();sel.fechaDia=iso;sel.prog=null;guardar(K.sel,sel);datos=null;volverARaiz();cargar(iso,false);};
-  document.getElementById('mAct').onclick=()=>{vibrar();enviar();cargar(null,false);};
+  document.getElementById('mAct').onclick=()=>{vibrar();enviar();subirFotos();cargar(null,false);};
   const bo=document.getElementById('mOrd');if(bo)bo.onclick=()=>{const pr=progActual(),un=unidadActual(pr);if(pr&&un)empezarOrdenar(pr,un);};
   const bi=document.getElementById('mIns');if(bi)bi.onclick=instalarApp;
   document.getElementById('mSal').onclick=pedirSalir;
   enlazarComun();
 }
 async function pedirSalir(){
-  const ok=await dialogo('¿Cerrar sesión?',cola.length?'Hay '+plural(cola.length,'cambio')+' sin enviar. Se conservan en este celular y se enviarán cuando vuelvas a ingresar.':'Tendrás que escribir tu usuario y contraseña otra vez.','Cerrar sesión','Cancelar');
+  const ok=await dialogo('¿Cerrar sesión?',pendientes()?'Hay '+(cola.length?plural(cola.length,'cambio'):'')+(cola.length&&fotoCola.length?' y ':'')+(fotoCola.length?plural(fotoCola.length,'foto'):'')+' sin enviar. Se conservan en este celular y se enviarán cuando vuelvas a ingresar.':'Tendrás que escribir tu usuario y contraseña otra vez.','Cerrar sesión','Cancelar');
   if(ok)cerrarSesion();
 }
 function cerrarSesion(msg){
@@ -1341,6 +1832,7 @@ function abrirHoja(prog,u,s,p){
 /* desdePop: la cerró el botón atrás del celular (el historial ya retrocedió) */
 function cerrarHoja(desdePop){
   if(!hojaCtx)return;
+  if(hojaCtx.modo==='foto'&&hojaCtx.pend)toast('Sin la foto de la guía no se marca la entrega.',true);
   document.getElementById('hoja').classList.add('cerrada');
   document.getElementById('velo').classList.remove('on');
   hojaCtx=null;
@@ -1348,10 +1840,11 @@ function cerrarHoja(desdePop){
 }
 function pintarHoja(){
   if(hojaCtx&&hojaCtx.modo==='nov')return pintarHojaNov();
+  if(hojaCtx&&hojaCtx.modo==='foto')return pintarHojaFoto();
   const h=hojaCtx,el=document.getElementById('hoja');
   const otras=h.s.peds.length>1;
   const ops=ORDEN_EST.map(e=>`<button class="opc c-${EST[e].cls}${e===h.actual?' actual':''}${e===h.elegido?' marcada':''}" data-op="${esc(e)}">
-      <span class="oi">${ICO_EST[e]}</span><span><b>${TXT_EST[e]}</b><small>${esc(EST[e].d)}</small></span></button>`).join('');
+      <span class="oi">${ICO_EST[e]}</span><span><b>${TXT_EST[e]}</b><small>${esc(EST[e].d)}${NECESITA_FOTO[e]&&fotoObligatoria()?' · con foto de la guía':''}</small></span></button>`).join('');
   let extra='';
   if(h.elegido==='ANULADO'){
     extra=`<div class="campo"><label for="hMot">Motivo de la anulación <em>(obligatorio)</em></label>
@@ -1362,11 +1855,12 @@ function pintarHoja(){
       <textarea id="hDet" maxlength="500" placeholder="Ej. 2 sillas con el tapiz rasgado">${esc(h.detalle)}</textarea></div>`;
   }
   const necesitaGuardar=h.elegido==='ANULADO'||h.elegido==='ENTREGA PARCIAL';
-  el.innerHTML=`<div class="asa"></div><h3 id="hojaTit">Factura ${esc(h.p.FACTURA||'sin número')}</h3>
+  el.innerHTML=`<div class="hoja-top"><button type="button" class="asa-btn" data-cerrar aria-label="Cerrar (o desliza hacia abajo)"><span class="asa"></span></button><button type="button" class="hoja-x" data-cerrar aria-label="Cerrar">✕</button></div><h3 id="hojaTit">Factura ${esc(h.p.FACTURA||'sin número')}</h3>
     <div class="sub">${esc(titulo(h.p.CLIENTES))} · parada ${h.s.orden||h.s.n}</div>
     <div class="opciones">${ops}</div>${extra}
     ${otras?`<label class="todas"><input type="checkbox" id="hTodas" ${h.todas?'checked':''}> Aplicar a las ${h.s.peds.length} facturas de esta parada</label>`:''}
     ${necesitaGuardar?`<button class="btn-guardar" id="hOk">Guardar ${esc(TXT_EST[h.elegido].toLowerCase())}</button>`:''}
+    <button class="nov-link foto-link" id="hFoto">${SVG.camara}<span><b>Foto de la guía firmada</b><small>${(()=>{const n=fotosDePeds(h.prog,[h.p]).length;return n?plural(n,'foto')+' en esta factura':'Evidencia para el asesor';})()}</small></span>${SVG.chev}</button>
     <button class="nov-link" id="hNov">${SVG.bandera}<span><b>Registrar una novedad</b><small>Demora del cliente, cambio de dirección, sin respuesta…</small></span>${SVG.chev}</button>
     <button class="btn-sec" id="hNo">Cancelar</button>`;
   el.querySelectorAll('[data-op]').forEach(b=>b.onclick=()=>elegir(b.dataset.op));
@@ -1377,6 +1871,7 @@ function pintarHoja(){
   const tt=document.getElementById('hTodas');if(tt)tt.onchange=()=>{h.todas=tt.checked;};
   const ok=document.getElementById('hOk');if(ok)ok.onclick=confirmarHoja;
   document.getElementById('hNo').onclick=()=>cerrarHoja();
+  const hf=document.getElementById('hFoto');if(hf)hf.onclick=()=>{const c=hojaCtx;abrirFotos(c.prog,c.u,c.s);};
   const hn=document.getElementById('hNov');if(hn)hn.onclick=()=>{const c=hojaCtx;hojaCtx=Object.assign({},{modo:'nov',prog:c.prog,u:c.u,s:c.s,tipo:null,detalle:'',minutos:0});pintarHoja();};
 }
 /* ---------- hoja inferior: registrar una NOVEDAD en la parada ---------- */
@@ -1405,7 +1900,7 @@ function pintarHojaNov(){
     <div class="campo"><label for="nDet">Explica brevemente qué pasó <em>(obligatorio)</em></label>
       <textarea id="nDet" maxlength="500" placeholder="${esc(sel.ej)}">${esc(h.detalle)}</textarea></div>
     <button class="btn-guardar" id="nOk">Registrar novedad</button>`;
-  el.innerHTML=`<div class="asa"></div><h3 id="hojaTit">Registrar novedad</h3>
+  el.innerHTML=`<div class="hoja-top"><button type="button" class="asa-btn" data-cerrar aria-label="Cerrar (o desliza hacia abajo)"><span class="asa"></span></button><button type="button" class="hoja-x" data-cerrar aria-label="Cerrar">✕</button></div><h3 id="hojaTit">Registrar novedad</h3>
     <div class="sub">${esc(titulo(h.s.peds[0].CLIENTES))} · parada ${h.s.orden||h.s.n}${h.s.peds.length>1?' · '+h.s.peds.length+' facturas':''}</div>
     <p class="nov-ayuda">${sel?'Novedad elegida. Agrega el detalle y regístrala.':'Elige la novedad. Aunque la entrega se haya hecho, regístrala si pasó.'}</p>
     <div class="opciones${sel?' elegida':''}">${sel?`<button class="opc nov-op marcada" data-nt=""><span class="oi">${ICO_NOV[sel.i]}</span><span><b>${esc(sel.l)}</b><small>Tocar para cambiar</small></span></button>`:ops}</div>${extra}
@@ -1423,6 +1918,7 @@ function pintarHojaNov(){
   document.getElementById('hNo').onclick=()=>cerrarHoja();
 }
 function enlazarNovedades(prog,u,par){
+  app.querySelectorAll('[data-foto]').forEach(b=>b.onclick=ev=>{ev.stopPropagation();vibrar(8);abrirFotos(prog,u,par[+b.dataset.foto]);});
   app.querySelectorAll('[data-nov]').forEach(b=>b.onclick=ev=>{ev.stopPropagation();vibrar(8);abrirNovedad(prog,u,par[+b.dataset.nov]);});
   app.querySelectorAll('[data-novq]').forEach(b=>b.onclick=async()=>{
     const s=par[+b.dataset.novq];const n=novedadesDe(prog,s).find(x=>String(x.id)===b.dataset.novid);if(!n)return;
@@ -1448,11 +1944,45 @@ function confirmarHoja(){
     return x.estado!==e||(e==='ANULADO'&&x.motivo!==h.motivo.trim())||(e==='ENTREGA PARCIAL'&&x.detalle!==h.detalle.trim());});
   if(!cambian.length){cerrarHoja();toast('Ya tenía ese estado.');return;}
   const prog=h.prog,u=h.u,mot=h.motivo,det=h.detalle;
+  if(sinFotoPara(prog,cambian,e).length){
+    hojaCtx={modo:'foto',prog,u,s:h.s,todas:false,pend:{peds:cambian,estado:e,motivo:'',detalle:e==='ENTREGA PARCIAL'?det.trim():''}};
+    vibrar(10);pintarHoja();return;
+  }
   cerrarHoja();vibrar(18);
   registrar(prog,u,cambian,e,e==='ANULADO'?mot.trim():'',e==='ENTREGA PARCIAL'?det.trim():'',true);
 }
 document.getElementById('velo').onclick=()=>cerrarHoja();
-document.addEventListener('keydown',ev=>{if(ev.key==='Escape'){if(dlgAbierto)cerrarDialogo(false);else if(hojaCtx)cerrarHoja();}});
+/* la hoja se cierra tocando la agarradera o la ✕, o deslizándola hacia abajo
+   (desde arriba, o desde cualquier parte si su contenido ya está al inicio) */
+(function(){
+  const h=document.getElementById('hoja');
+  let y0=null,dy=0,arrastra=false,t0=0;
+  h.addEventListener('click',ev=>{if(ev.target.closest('[data-cerrar]'))cerrarHoja();});
+  h.addEventListener('touchstart',ev=>{
+    if(!hojaCtx||ev.touches.length!==1){y0=null;return;}
+    const enTop=!!ev.target.closest('.hoja-top');
+    if(h.scrollTop>2&&!enTop){y0=null;return;}
+    if(!enTop&&ev.target.closest('textarea,input,select')){y0=null;return;}
+    y0=ev.touches[0].clientY;dy=0;arrastra=false;t0=Date.now();
+  },{passive:true});
+  h.addEventListener('touchmove',ev=>{
+    if(y0==null)return;
+    dy=ev.touches[0].clientY-y0;
+    if(!arrastra&&dy<-6){y0=null;return;}          // hacia arriba: es scroll normal
+    if(dy>6){arrastra=true;h.style.transition='none';h.style.transform='translateY('+Math.max(0,dy-6)+'px)';
+      document.getElementById('velo').style.opacity=String(Math.max(.2,1-dy/500));ev.preventDefault();}
+  },{passive:false});
+  const soltar=()=>{
+    if(y0==null)return;
+    const v=dy/Math.max(1,Date.now()-t0);
+    h.style.transition='';document.getElementById('velo').style.opacity='';
+    if(arrastra&&(dy>110||v>.55)){h.style.transform='translateY(105%)';vibrar(8);cerrarHoja();setTimeout(()=>{h.style.transform='';},320);}
+    else h.style.transform='';
+    y0=null;arrastra=false;
+  };
+  h.addEventListener('touchend',soltar);h.addEventListener('touchcancel',soltar);
+})();
+document.addEventListener('keydown',ev=>{if(ev.key==='Escape'){if(dlgAbierto)cerrarDialogo(false);else if(visorCtx)cerrarVisor();else if(hojaCtx)cerrarHoja();}});
 
 /* ---------- diálogo propio (en lugar de las ventanas del navegador) ---------- */
 let dlgAbierto=null;
@@ -1490,8 +2020,8 @@ function toast(txt,err,deshacer){
 /* ---------- se mantiene al día solo ---------- */
 /* con la app abierta, la ruta se vuelve a consultar cada 30 segundos (antes 90) */
 setInterval(()=>{if(ses&&!document.hidden&&!hojaCtx&&!dlgAbierto&&!ordenando&&!enviando&&Date.now()-ultimaCarga>30000)cargar(null,true);},10000);
-document.addEventListener('visibilitychange',()=>{if(!document.hidden&&ses){enviar();if(Date.now()-ultimaCarga>15000&&!ordenando)cargar(null,true);}});
-window.addEventListener('online',()=>{enviar();if(ses)cargar(null,true);});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&ses){enviar();subirFotos();if(Date.now()-ultimaCarga>15000&&!ordenando)cargar(null,true);}});
+window.addEventListener('online',()=>{enviar();subirFotos();if(ses)cargar(null,true);});
 window.addEventListener('offline',()=>pintarSync('sin conexión'));
 
 /* ---------- actualización automática del archivo ---------- */
@@ -1560,6 +2090,7 @@ if(datos&&datos.fechaDia!==(sel.fechaDia||hoyLima()))datos=null;
 try{history.replaceState({mr:0},'');}catch(e){}
 pintar();
 if(ses){cargar(sel.fechaDia||hoyLima(),true);ubicar();programarEnvio(500);}
+cargarFotosCola();
 revisarVersion();setInterval(revisarVersion,1800000);
 </script>
 </body>
