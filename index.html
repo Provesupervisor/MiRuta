@@ -420,6 +420,27 @@ body.con-pie .inst,body:has(.hoja:not(.cerrada)) .inst{display:none}
 .nov-op .oi{background:#d97706}
 .nov-ayuda{margin:2px 0 10px;font-size:13.5px;color:var(--suave)}
 .rapidos button.on{background:var(--negro);color:#fff;border-color:var(--negro)}
+/* v31: restricción horaria (colores propios, distintos a los de estado) */
+.rh{display:flex;align-items:center;gap:8px;margin:9px 0 2px;padding:8px 11px;border-radius:11px;font-size:13.5px;line-height:1.25;font-weight:600;
+  background:#eef0ff;color:#3730a3;border:1px solid #d9dcfb}
+.rh svg{width:18px;height:18px;flex:none}
+.rh b{font-weight:800;white-space:nowrap}
+.rh small{font-size:12px;font-weight:600;opacity:.8}
+.rh .rh-t{margin-left:auto;white-space:nowrap;font:700 15px var(--cond);letter-spacing:.2px}
+.rh.warn{background:#4338ca;color:#fff;border-color:#4338ca;box-shadow:0 4px 12px #4338ca40}
+.rh.warn svg{animation:rhLatido 1.2s ease-in-out infinite}
+.rh.tarde{background:var(--negro);color:#fff;border-color:var(--negro)}
+.rh.tarde svg{color:#ff5a6a}
+.rh.ok{background:#f2f3ff;color:#4b4f8a}
+.rh.duda{background:#fff;color:#4338ca;border-style:dashed}
+@keyframes rhLatido{50%{transform:scale(1.18)}}
+@media (prefers-reduced-motion:reduce){.rh.warn svg{animation:none}}
+.campo .rapidos button.on::before{content:'✓ ';font-weight:800}
+/* v31: ubicación en vivo */
+.ubi-ind{display:flex;align-items:center;gap:7px;margin-top:10px;font-size:12.5px;color:#c9d0d7}
+.ubi-ind i{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px #22c55e33;flex:none}
+.ubi-ind.off i{background:#9aa3ad;box-shadow:none}
+.ubi-ind.mal i{background:#f59e0b;box-shadow:0 0 0 3px #f59e0b33}
 .nov-min{width:100%;height:46px;border:2px solid var(--linea);border-radius:12px;padding:0 12px;font:inherit;font-size:16px}
 @media (max-width:330px){.nov-btn span{display:none}.nov-btn{padding:0 9px}}
 .nov-min-c{display:inline-block;background:#fde7c4;color:#7a4300;font-weight:700;border-radius:5px;padding:0 6px;margin-right:6px}
@@ -513,6 +534,9 @@ body.con-pie .inst,body:has(.hoja:not(.cerrada)) .inst{display:none}
 .cam-ayuda{background:#fff7e6;border-left:4px solid #d97706;border-radius:12px;padding:10px 12px;margin:10px 0 4px;font-size:13.5px;line-height:1.4;color:#5b3a00}
 .cam-ayuda>b{display:block;font-size:14.5px;margin-bottom:3px;color:#7a4b00}
 .cam-ayuda ol{margin:4px 0 0;padding-left:18px}.cam-ayuda li{margin:2px 0}
+/* v30: el celular cerró Mi Ruta mientras la cámara estaba abierta */
+.cam-cortada{background:#eef6ff;border-left:4px solid #2563eb;border-radius:12px;padding:10px 12px;margin:10px 0 4px;font-size:13.5px;line-height:1.4;color:#1e3a5f}
+.cam-cortada>b{display:block;font-size:14.5px;margin-bottom:3px;color:#1d4ed8}
 .cam-ayuda .cam-int{display:flex;width:100%;justify-content:center;margin:6px 0 4px;min-height:46px;background:#1e4f86;border-color:#1e4f86;color:#fff;font-size:15px;border-radius:12px}
 .cam-int-tx{display:block;font-size:12.5px;color:#7a5a20;margin-bottom:6px}
 .cam-app{position:fixed;inset:0;z-index:80;background:#000;display:none;flex-direction:column;color:#fff}
@@ -620,7 +644,7 @@ html:not(.hw) .hw-arana,html:not(.hw) .hw-fbox{display:none}
    Sin señal no se pierde nada: los cambios esperan en el celular y se
    envían solos al volver la conexión.
    ===================================================================== */
-const APP_VERSION='2026-10-29 · ruta-29';
+const APP_VERSION='2026-11-07 · ruta-33';
 const NUBE_URL_DEFECTO='https://script.google.com/macros/s/AKfycbzPfXZFs9GVEfBfDERzGGzxO8OgoRaMOHIg_QO9jOpMP31BkvENFenAP9rubgh_GPcW4Q/exec';
 const LOGO='data:image/png;base64,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';
 /* símbolo de Mi Ruta: camino con paradas 1, 2 y 3 (propuesta A) */
@@ -653,7 +677,13 @@ const NOVEDADES=[
 ];
 const ICO_NOV={"reloj": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M12 7.5V12l3 2\"/></svg>", "pin": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 21s-6.5-6-6.5-11A6.5 6.5 0 0 1 18.5 10c0 5-6.5 11-6.5 11z\"/><path d=\"M10 8.5l4 4M14 8.5l-4 4\"/></svg>", "tel": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z\"/><path d=\"M15 3l6 6M21 3l-6 6\"/></svg>", "nadie": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 21V9l9-6 9 6v12\"/><path d=\"M9 21v-6h6v6\"/><path d=\"M10 11l4 0\"/></svg>", "rechazo": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M6 6l12 12\"/></svg>", "doc": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7 3h7l4 4v14H7z\"/><path d=\"M14 3v4h4\"/><path d=\"M10 13h5M10 17h5\"/></svg>", "auto": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 16V11l2-4h10l2 4v5\"/><path d=\"M4 16h16v2H4z\"/><circle cx=\"8\" cy=\"18\" r=\"1.4\"/><circle cx=\"16\" cy=\"18\" r=\"1.4\"/></svg>", "otra": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 20h4L19 9l-4-4L4 16z\"/><path d=\"M13.5 6.5l4 4\"/></svg>"};
 function novInfo(t){return NOVEDADES.find(n=>n.t===t)||{t,l:t,i:'otra'};}
-const MOTIVOS=['Cliente cerrado','Cliente no recibe la mercadería','Dirección no ubicada','Fuera del horario de atención','Cliente reprogramó la entrega','Mercadería dañada'];
+/* v31: motivos estándar (los mismos nombres que el formulario de novedades) */
+const MOTIVOS=['Rechazo del cliente','Cliente cerrado','Cliente no contesta','No se encontró al cliente','Dirección incorrecta','Fuera del horario de atención','Cliente reprogramó la entrega','Errores en la documentación','Mercadería dañada'];
+const MOTIVOS_PARC=['Producto dañado','Faltó mercadería','Producto equivocado','El cliente recibió solo una parte','Errores en la documentación'];
+/* "Cliente cerrado — se fue a almorzar" → {chip:'Cliente cerrado', txt:'se fue a almorzar'} */
+function separarMotivo(t,lista){t=String(t||'').trim();const c=lista.find(m=>t.toLowerCase().startsWith(m.toLowerCase()));
+  return c?{chip:c,txt:t.slice(c.length).replace(/^\s*[—\-.:,]\s*/,'')}:{chip:'',txt:t};}
+const unirMotivo=(c,t)=>{t=String(t||'').trim();return c?c+(t?' — '+t:''):t;};
 
 /* ---------- almacenamiento local (nunca debe tumbar la app) ---------- */
 function leer(k,def){try{const v=localStorage.getItem(k);return v?JSON.parse(v):def;}catch(e){return def;}}
@@ -801,6 +831,50 @@ function estadoParada(lista){
   return 'EN RUTA';
 }
 
+/* ---------- v31: ubicación en vivo para Seguimiento ----------
+   Con la app abierta, cada minuto se manda la ubicación del camión (solo la última queda
+   guardada). Solo lo hace alguien del equipo del camión, el día de hoy y con paradas
+   pendientes. Si se bloquea la pantalla o se cierra la app, se detiene (Android no deja más). */
+const UBI_CADA=60000;
+let ubiUlt=0,ubiOk=0,ubiEstado='',ubiApagado=false;
+function ubiCamion(){
+  if(!ses||!datos||ubiApagado||!navigator.geolocation)return null;
+  if((sel.fechaDia||'')!==hoyLima())return null;
+  const prog=progActual(),u=prog&&unidadActual(prog);
+  if(!u||!u.placa)return null;
+  if(!(permiso()==='todo'?esMio(u):puedoEditar(u)))return null;        // el supervisor mirando no "es" el camión
+  if(!paradasDe(prog,u).some(s=>!FINAL[s.estado]))return null;          // ruta terminada: deja de compartir
+  const d=new Date(Date.now()-5*3600e3).getUTCHours();if(d<5||d>=21)return null;
+  return {prog,u};
+}
+function ubiHtml(prog,u){
+  const c=ubiCamion();
+  if(!c||c.u!==u)return '';
+  const t=ubiOk?new Date(ubiOk-5*3600e3).toISOString().slice(11,16):'';
+  const [cls,txt]=ubiEstado==='sinPermiso'?['mal','Ubicación desactivada: permite la ubicación para que el supervisor vea el camión']
+    :ubiEstado==='error'?['mal','Ubicación: se reintenta en un minuto']
+    :ubiOk?['','Compartiendo ubicación con el supervisor · '+t]:['off','Activando la ubicación del camión…'];
+  return `<div class="ubi-ind ${cls}" id="ubiInd"><i></i><span>${esc(txt)}</span></div>`;
+}
+function pintarUbi(){const el=document.getElementById('ubiInd'),prog=progActual(),u=prog&&unidadActual(prog);
+  if(el&&u){const t=document.createElement('div');t.innerHTML=ubiHtml(prog,u);el.replaceWith(t.firstChild||document.createTextNode(''));}}
+function enviarUbicacion(forzar){
+  if(document.hidden)return;
+  const c=ubiCamion();if(!c)return;
+  if(!forzar&&Date.now()-ubiUlt<UBI_CADA-5000)return;
+  ubiUlt=Date.now();
+  navigator.geolocation.getCurrentPosition(async pos=>{
+    try{
+      const r=await pedir({accion:'ubicacion',prog:c.prog.prog,placa:c.u.placa,lat:pos.coords.latitude,lng:pos.coords.longitude,prec:pos.coords.accuracy,ts:Date.now()},20000);
+      if(r&&r.ok){ubiOk=Date.now();ubiEstado='';}
+      else{ubiEstado='error';if(/acci[oó]n|no reconoc|desconoc/i.test(r&&r.error||''))ubiApagado=true;}   // Apps Script anterior a la v13.6
+    }catch(e){ubiEstado='error';}
+    pintarUbi();
+  },err=>{ubiEstado=err&&err.code===1?'sinPermiso':'error';pintarUbi();},{enableHighAccuracy:true,timeout:20000,maximumAge:30000});
+}
+setInterval(()=>enviarUbicacion(),UBI_CADA);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)enviarUbicacion();});
+
 /* ---------- carga desde el servidor ---------- */
 let enCarga=false;
 async function cargar(dia,silencioso){
@@ -820,6 +894,8 @@ async function cargar(dia,silencioso){
     elegirAutomatico();
     errEnv='';if(esDeRed(errFoto))errFoto='';   // la señal volvió
     pintar();
+    revisarSalidaCamara();
+    enviarUbicacion();
     return true;
   }catch(e){
     ultimoError=e.message;
@@ -1056,6 +1132,7 @@ let camAbrio=false,tCamAyuda=null,camAyuda=false;
 function prepararFoto_destino(prog,u,s,peds,cual,reemplaza){
   if(!puedoEditar(u)){toast('Esta ruta es de otro equipo: solo puedes verla.',true);return false;}
   fotoDestino={prog,u,s,peds,reemplaza:reemplaza||null};
+  marcarSalidaCamara(prog,u,s,cual);
   const inp=document.getElementById(cual);try{inp.value='';}catch(e){}
   /* si en unos segundos el celular no abrió la cámara (ni la galería), se explica qué hacer */
   camAbrio=false;camAyuda=false;clearTimeout(tCamAyuda);
@@ -1093,6 +1170,47 @@ async function procesarFoto(dest,file){
   try{await guardarFoto(dest,file);}
   catch(e){toast('No se pudo preparar la foto: '+e.message,true);}
   finally{fotoProcesando=false;refrescarHojaFoto();}
+}
+
+/* ---------- v30: la foto que se pierde porque el celular cierra Mi Ruta ----------
+   Al abrir la app de Cámara, Android puede cerrar el navegador para liberar memoria
+   (pasa en celulares con poca RAM). Al volver, Mi Ruta se abre de cero: la foto no
+   llega y no se marca nada. Antes de salir a la cámara se anota a dónde iba la foto;
+   si la app vuelve a abrir con esa nota pendiente, se pasa a la cámara de Mi Ruta
+   (no sale de la app) y se reabre la misma parada para tomar la foto otra vez. */
+const K_SALIDA='ruta_salida_camara';
+let avisoCortada='';
+function marcarSalidaCamara(prog,u,s,cual){
+  try{const p=hojaCtx&&hojaCtx.pend;
+    localStorage.setItem(K_SALIDA,JSON.stringify({t:Date.now(),cual,prog:prog.prog,placa:u.placa,key:s.key,cli:String((s.peds[0]||{}).CLIENTES||''),
+      pend:p?{estado:p.estado,motivo:p.motivo||'',detalle:p.detalle||'',ids:p.peds.map(x=>x.id)}:null}));}catch(e){}
+}
+function limpiarSalidaCamara(){try{localStorage.removeItem(K_SALIDA);}catch(e){}}
+let salidaRevisada=false,fotosColaP=Promise.resolve();
+/* espera a leer las fotos guardadas en el celular: si la foto alcanzó a guardarse, no hay nada que avisar */
+function revisarSalidaCamara(){
+  if(salidaRevisada)return;salidaRevisada=true;
+  fotosColaP.then(revisarSalida_,revisarSalida_);
+}
+function revisarSalida_(){
+  let m=null;try{m=JSON.parse(localStorage.getItem(K_SALIDA)||'null');}catch(e){}
+  limpiarSalidaCamara();
+  if(!m||!m.t||Date.now()-m.t>15*60000)return;            // solo si fue hace poco
+  const prog=(datos&&datos.programaciones||[]).find(p=>p.prog===m.prog);if(!prog)return;
+  const u=prog.unidades.find(x=>normPlaca(x.placa)===normPlaca(m.placa));if(!u)return;
+  const s=paradasDe(prog,u).find(x=>x.key===m.key);if(!s)return;
+  const interna=camInternaPosible();
+  if(interna){try{localStorage.setItem(K_CAM,'1');}catch(e){}}
+  let pend=null;
+  if(m.pend){const peds=s.peds.filter(p=>m.pend.ids.includes(p.id));
+    if(peds.length&&sinFotoPara(prog,peds,m.pend.estado).length)pend={peds,estado:m.pend.estado,motivo:m.pend.motivo,detalle:m.pend.detalle};}
+  if(!pend&&!faltanFotos(prog,s).length)return;             // la foto sí llegó (por ejemplo, desde el otro celular)
+  avisoCortada=`<div class="cam-cortada" role="alert"><b>La foto no llegó: el celular cerró Mi Ruta</b>${interna
+    ?'Pasa en celulares con poca memoria al abrir su app de Cámara. Desde ahora este celular usa la <strong>cámara de Mi Ruta</strong>, que no sale de la app. Toma la foto otra vez.'
+    :'Pasa en celulares con poca memoria al abrir su app de Cámara. Toma la foto con la cámara del celular y luego elígela con el botón de <strong>galería</strong> 🖼️.'}</div>`;
+  if(prog.prog!==sel.prog||normPlaca(u.placa)!==normPlaca(sel.placa)){sel.prog=prog.prog;sel.placa=u.placa;pintar();}
+  abrirFotos(prog,u,s,pend);
+  vibrar([30,60,30]);
 }
 
 /* ---------- cámara de Mi Ruta (dentro de la app) ----------
@@ -1164,6 +1282,7 @@ function cerrarCamaraInterna(desdePop){
   const el=document.getElementById('camApp');if(el){el.classList.remove('on');el.innerHTML='';}
 }
 async function guardarFoto(dest,file){
+  avisoCortada='';
   const {prog,u,peds}=dest,ts=Date.now();
   const pos=ultimaPos&&ts-ultimaPos.t<600000?ultimaPos:null;
   const blob=await prepararFoto(file,{
@@ -1184,7 +1303,7 @@ async function guardarFoto(dest,file){
     }
   }
   try{await fdbTx('readwrite',st=>st.put(f));}catch(e){sinIDB=true;}
-  fotoCola.push(f);
+  fotoCola.push(f);limpiarSalidaCamara();
   vibrar([14,30,14]);pintar();programarFotos(200);
   if(vieja){refrescarHojaFoto();toast('Foto cambiada'+(navigator.onLine===false?': se envía sola al volver la señal':''));return;}
   if(hojaCtx&&hojaCtx.pend){revisarPendiente();if(!hojaCtx||!hojaCtx.pend)return;}
@@ -1358,6 +1477,7 @@ function pintarHojaFoto(){
     <div class="sub">${esc(titulo(s.peds[0].CLIENTES))} · parada ${s.orden||s.n}</div>
     ${h.pend?`<div class="ff-aviso">${SVG.candado}<span>Para marcar <b>${esc(TXT_EST[h.pend.estado].toLowerCase())}</b> toma la foto de la guía firmada de ${faltaConf.length>1?'las facturas <b>'+esc(faltaConf.map(p=>p.FACTURA||'sin número').join(', '))+'</b>':'la factura <b>'+esc(faltaConf.map(p=>p.FACTURA||'sin número').join(''))+'</b>'}. Se marca sola al guardar la foto.</span></div>`:''}
     <p class="foto-guia">Que se lean la firma, el sello y la fecha del cliente. Si el cliente no firma, toma la foto igual y registra una novedad. La foto se envía sola; sin señal espera en el celular.</p>
+    ${avisoCortada&&!fotoProcesando?avisoCortada:''}
     ${camAyuda&&!fotoProcesando?ayudaCamaraHtml():''}
     ${varias?`<label class="ff-todas"><input type="checkbox" id="fTodas" ${h.todas?'checked':''}> Una sola guía para las ${s.peds.length} facturas</label>`:''}
     ${filas}
@@ -1594,6 +1714,7 @@ window.addEventListener('popstate',()=>{
 /* ---------- pintar la pantalla que corresponda ---------- */
 function pintar(dir){
   const v=vistaActual();
+  if(v!=='login')setTimeout(enviarUbicacion,0);      // v31: la primera ubicación sale apenas se ve la ruta (luego cada minuto)
   const y=window.scrollY;
   document.body.classList.remove('con-tab','con-pie');
   if(v==='login')pintarLogin();
@@ -1782,6 +1903,7 @@ function pintarRuta(){
   const hero=`<section class="hero">
     <div class="hero-f1"><span class="placa">${esc(u.placa||'Sin placa')}</span><span class="chip">Ruta ${esc(u.ruta||'—')}</span>${suyas.length>1?'':`<span class="chip">${esc(titulo(prog.turnoTxt))}</span>`}${esHoy?'':`<span class="chip dia">${esc(fechaLarga(prog.fechaDia))}</span>`}</div>
     ${equipoTxt(u)?`<div class="hero-sub">${esc(equipoTxt(u))}</div>`:''}
+    ${ubiHtml(prog,u)}
     ${suyas.length>1?`<div class="turnos" role="tablist">${suyas.map(p=>`<button data-tprog="${esc(p.prog)}" class="${p.prog===prog.prog?'on':''}" role="tab" aria-selected="${p.prog===prog.prog}">${esc(titulo(p.turnoTxt))}</button>`).join('')}</div>`:''}
     <div class="hero-av"><div class="anillo" style="--p:${pct}"><b class="${pct>=100?'largo':''}">${pct}%</b></div><div class="tx"><b>${atendidas} de ${par.length}</b><span>paradas atendidas · ${plural(nFac,'factura')}</span></div></div>
     <div class="tira" aria-hidden="true">${par.map(s=>`<span class="c-${EST[s.estado].cls}${s===sig?' actual':''}"></span>`).join('')}</div>
@@ -1816,6 +1938,489 @@ function pintarRuta(){
   enlazarComun();
 }
 /* tarjeta de una parada, como en la versión anterior: facturas y botones a la vista */
+/* ---------- v33: restricción horaria escrita en la observación ----------
+   Motor = el mismo que normalizó tus despachos ene–oct 2026 (Análisis de restricciones horarias):
+   1,238 redacciones reales distintas → 100 % igual al Diccionario; 1,466 textos sin horario → 0 falsos.
+   Regla: solo se usan horas que el asesor escribió. Si no hay hora clara, no se inventa:
+   la etiqueta pide revisar la observación y no se evalúa si llegó a tiempo.
+   restriccionDe(texto) devuelve null o:
+     {tipo:'ventana', franjas:[[desde|null,hasta|null],…] (min), desde, hasta, cita, llegar, brk, dudosa}
+     {tipo:'refrigerio', brk:[[a,b]]}            solo dice cuándo NO recibe
+     {tipo:'revisar', etiqueta}                  hora única sin precisar, mañana/tarde sin hora, ilegible
+     {tipo:'pref', etiqueta}                     "lo más temprano", "primer punto" (preferencia, no restricción) */
+const RH=(function(){
+'use strict';
+const PYW = '[\\p{L}\\p{N}_]', PYNW = '[^\\p{L}\\p{N}_]';
+const PYB = '(?:(?<=' + PYW + ')(?!' + PYW + ')|(?<!' + PYW + ')(?=' + PYW + '))';
+const _reCache = new Map();
+function pyx(src) { // traduce \b \w \W
+  let out = '';
+  for (let i = 0; i < src.length; i++) {
+    const c = src[i];
+    if (c === '\\' && i + 1 < src.length) {
+      const n = src[i + 1];
+      if (n === 'b') out += PYB; else if (n === 'w') out += PYW; else if (n === 'W') out += PYNW; else out += c + n;
+      i++;
+    } else out += c;
+  }
+  return out;
+}
+function RX(src, g) {
+  const k = src + (g ? '\u0000g' : '');
+  let r = _reCache.get(k);
+  if (!r) { r = new RegExp(pyx(src), g ? 'gu' : 'u'); _reCache.set(k, r); }
+  if (g) r.lastIndex = 0;
+  return r;
+}
+const re_search = (p, s) => RX(p).exec(s);
+const re_test = (p, s) => RX(p).test(s);
+function re_all(p, s) { const r = RX(p, true), out = []; let m; while ((m = r.exec(s)) !== null) { out.push(m); if (m[0] === '') r.lastIndex++; } return out; }
+function re_sub(p, rep, s) { const r = RX(p, true); return s.replace(r, typeof rep === 'function' ? (...a) => { const m = a.slice(0, -2); return rep(m); } : rep); }
+const g = (m, i) => (m[i] === undefined ? null : m[i]);
+const mStart = m => m.index, mEnd = m => m.index + m[0].length;
+const pyInt = x => parseInt(x, 10);
+const replAll = (s, a, b) => (a ? s.split(a).join(b) : s);
+
+function pyRound(v, n) { // round() de Python: decimal exacto, empates al par
+  if (!isFinite(v)) return v;
+  const s = Math.abs(v).toFixed(100), dot = s.indexOf('.'), rest = s.slice(dot + 1 + n);
+  if (rest[0] === '5' && /^0*$/.test(rest.slice(1))) {
+    const down = Number((v < 0 ? '-' : '') + s.slice(0, dot + 1 + n));
+    const last = n ? +s[dot + n] : +s[dot - 1]; // último dígito conservado
+    if (last % 2 === 0) return down;
+    return Number((down + (v < 0 ? -1 : 1) * Math.pow(10, -n)).toFixed(n));
+  }
+  return Number(v.toFixed(n));
+}
+function fmt(v) {
+  if (v === null || v === undefined) return '';
+  let h = Math.trunc(v), x = (v - h) * 60;
+  let m = Math.round(x); if (Math.abs(x - Math.trunc(x) - 0.5) < 1e-12 && Math.trunc(x) % 2 === 0) m = Math.trunc(x); // redondeo bancario como Python
+  if (m === 60) { h += 1; m = 0; }
+  return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+}
+
+function clean(s0) {
+  let s = String(s0 || '').toUpperCase();
+  s = replAll(s, 'Ñ', 'NN');
+  s = s.normalize('NFKD').replace(/\p{Mn}/gu, '');
+  s = replAll(s, 'NN', 'Ñ');
+  s = re_sub(String.raw`\(\s*NO HAY HORARIOS? DE DESPACHOS?\s*\)?`, ' ', s);
+  s = re_sub(String.raw`NO HAY HORARIOS? DE DESPAC\w*`, ' ', s);
+  s = re_sub(String.raw`\+?\d[\d ]{7,}\d`, ' ', s);
+  s = re_sub(String.raw`\b[A-Z]\d{4,}\b`, ' ', s);
+  s = re_sub(String.raw`\b\d{1,2}/\d{1,2}(/\d{2,4})?\b`, ' ', s);
+  s = re_sub(String.raw`\bFC \d+`, ' ', s);
+  s = re_sub(String.raw`\b(ATES|ANETS|ANTS|ANES)\b`, 'ANTES', s);
+  s = re_sub(String.raw`ANTES\s+D\s*E?\s*LAS?(SD)?\b`, 'ANTES DE LAS', s);
+  s = re_sub(String.raw`ANTES DE LASSD`, 'ANTES DE LAS', s);
+  s = re_sub(String.raw`\bHAST\b`, 'HASTA', s);
+  s = re_sub(String.raw`HASTA A LAS`, 'HASTA LAS', s);
+  s = re_sub(String.raw`\bMAÑAN\b`, 'MAÑANA', s);
+  s = re_sub(String.raw`\bFHRS\b`, 'HRS', s);
+  s = re_sub(String.raw`(\d+)\s*HORAS?\s+(\d{1,2})\s+(?=ANTES)`, m => String(pyInt(m[1]) * 60 + pyInt(m[2])) + ' MIN ', s);
+  s = re_sub(String.raw`\bDE(\d)`, m => 'DE ' + m[1], s);
+  s = re_sub(String.raw`-\s*-`, '-', s);
+  s = re_sub(String.raw`\b(RANGO|RAGO|RANDO|RENGO|RABGI)\b`, 'RANGO', s);
+  s = re_sub(String.raw`(RANGO (?:DE )?\d{1,2}(?::\d{2})?\s*(?:AM|PM)?)\s+Y\s+(?=\d)`, m => m[1] + ' - ', s);
+  s = re_sub(String.raw`(\d)\s*:\s*(\d{2})\s*H\b`, m => String(pyInt(m[1]) * 60 + pyInt(m[2])) + ' MIN', s);
+  s = re_sub(String.raw`\bDESPUES DE(?:\s*LAS?)?\s*(?=\d)`, 'DESDE LAS ', s);
+  s = re_sub(String.raw`DESPUES DEL MEDIO DIA|DEL MEDIO DIA EN ADELANTE`, 'A PARTIR DEL MEDIO DIA', s);
+  s = re_sub(String.raw`\b1ER PUNTO\b`, 'PRIMER PUNTO', s);
+  s = re_sub(String.raw`NO (MUY|TAN)\s+TARDE`, 'TEMPRANO', s);
+  s = replAll(replAll(s, 'MEDIODIA', 'MEDIO DIA'), 'MEDIO-DIA', 'MEDIO DIA');
+  s = re_sub(String.raw`(\d)\s*(AAM|MM|AA)\b`, m => m[1] + 'AM', s);
+  s = re_sub(String.raw`(\d):\s*(AM|PM)`, m => m[1] + ' ' + m[2], s);
+  s = re_sub(String.raw`(\d)\s*A\.\s*M\.?`, m => m[1] + 'AM', s);
+  s = re_sub(String.raw`(\d)\s*P\.\s*M\.?`, m => m[1] + 'PM', s);
+  s = re_sub(String.raw`\s+`, ' ', s);
+  return s.trim();
+}
+
+const T = String.raw`(\d{1,2})(?:\s*[:.]\s*(\d{2}))?\s*(AM|PM|HRS|HR|H)?`;
+const BRK_KW = String.raw`\bRE\w{0,4}GERIO|ALMUERZO|NO SE PUEDE REALIZAR|NO ATIENDE`;
+const NOT_AFTER0 = String.raw`(?!\s*(?:HORAS?|HRS?\b|H\b|MIN|MINUTOS|UND|UNID|SILLAS|PISO|TO\b|DO\b|ER\b|COPIAS|CAJAS|DIAS|BULTOS?|PAQUETES?|PIEZAS?|MESAS?|JUEGOS?|PARES?|KG|METROS?|TN\b))`;
+const NOT_AFTER = NOT_AFTER0.slice(0, -2) + String.raw`|M\b|MTS|MT\b|CM|MM\b))`;
+const AVISO = String.raw`(LLAMAR|LLAMA|AVISAR|ESCRIBIR|COMUNICARSE|LLAMADA)[^/]*?(\d+|UNA|UN|DOS|MEDIA)\s*(HORAS?|HROAS?|HRS?|H|MIN|MINUTOS)\b(?:\s*Y\s*(\d+)\s*MIN)?[^/]*?ANTES`;
+const WORDNUM = { UNA: 1, UN: 1, DOS: 2, MEDIA: 0.5 };
+const RNG3 = T + String.raw`\s*(?:-|–|A|AL|HASTA)\s*(?:LAS\s+)?` + T;
+const OPEN_L = -1.0, OPEN_R = 99.0;
+
+function parse_aviso(s) {
+  const m = re_search(AVISO, s);
+  if (m) {
+    const n0 = m[2]; let n = /^\d+$/.test(n0) ? pyInt(n0) : (n0 in WORDNUM ? WORDNUM[n0] : null);
+    const unit = m[3];
+    let mins = unit.startsWith('H') ? n * 60 : n;
+    if (m[4]) mins += pyInt(m[4]);
+    if (n === 0.5) mins = 30;
+    return Math.trunc(mins);
+  }
+  if (re_test(String.raw`LLAMAR (AL|CUANDO) ESTE?N? CERCA|LLAMAR AL ESTAR CERCA|AL ESTAR CERCA`, s)) return 'CERCA';
+  if (re_test(String.raw`\b(LLAMAR|LLAMA|AVISAR|ESCRIBIR)\b`, s) && !s.includes('NO LLAMAR')) return 'SIN TIEMPO';
+  return null;
+}
+
+function pre(s) {
+  s = re_sub(String.raw`\bHATA\b`, 'HASTA', s);
+  s = re_sub(String.raw`\b(\d{1,2})[.:]?(\d{2})\s*(AM|PM)\b`, m => pyInt(m[2]) < 60 ? m[1] + ':' + m[2] + ' ' + m[3] : m[0], s);
+  s = re_sub(String.raw`\bA(\d)`, m => 'A ' + m[1], s);
+  s = re_sub(String.raw`\bRANGO AM\b|\bTURNO AM\b`, 'RANGO DE LA MAÑANA', s);
+  s = re_sub(String.raw`\bRANGO PM\b|\bTURNO PM\b`, 'RANGO DE LA TARDE', s);
+  return s;
+}
+
+function lit(h0, m0, suf0) {
+  const h = pyInt(h0), m = m0 ? pyInt(m0) : 0;
+  if (m > 59 || h > 23) return [null, 'bad'];
+  let suf = (suf0 || '').trim();
+  if (suf === 'H' || suf === 'HR' || suf === 'HRS') suf = '';
+  if (suf === 'PM') { const v = h < 12 ? h + 12 : h; return [v + m / 60, null]; }
+  if (suf === 'AM') { if (h === 12) return [12 + m / 60, 'am12']; return [h + m / 60, null]; }
+  if (1 <= h && h <= 6) return [h + 12 + m / 60, 'pm'];
+  if (h === 7) return [7 + m / 60, 'ambig7'];
+  return [h + m / 60, null];
+}
+
+function resolve_range(h1, m1, s1, h2, m2, s2) {
+  const strip = x => { const y = replAll(replAll(replAll(x || '', 'HRS', ''), 'HR', ''), 'H', ''); return y || null; };
+  s1 = strip(s1); s2 = strip(s2);
+  const flags = [];
+  let [b, fb] = lit(h2, m2, s2);
+  if (b === null) return null;
+  if (fb === 'am12') flags.push('am12');
+  let a, fa;
+  if (s1) { [a, fa] = lit(h1, m1, s1); if (fa === 'am12') flags.push('am12'); }
+  else {
+    const h1i = pyInt(h1), mm = m1 ? pyInt(m1) : 0, a_lit = h1i + mm / 60;
+    if (s2 === 'PM' && h1i < 12 && h1i + 12 + mm / 60 < b && h1i <= pyInt(h2)) a = a_lit + 12;
+    else if (s2 === 'PM' && a_lit < b && a_lit >= 6) a = a_lit;
+    else if (a_lit >= 7 && (a_lit < b || !s2)) a = a_lit;
+    else if (1 <= h1i && h1i <= 6) { a = a_lit + 12; flags.push('pm'); }
+    else a = a_lit;
+    fa = null;
+  }
+  if (!s2 && b <= a) {
+    if (pyInt(h2) < 12 && b + 12 > a) { b = b + 12; flags.push('pm'); }
+    else return null;
+  } else if (!s2 && fb === 'pm') flags.push('pm');
+  if (a === null || a === undefined || a >= b || a < 6 || b > 23) return null;
+  return [a, b, flags];
+}
+
+const NOTE = { pm: 'hora sin AM/PM de 1 a 6 leída como tarde (ej. 3 → 15:00)', am12: '"12 AM" leído como mediodía (12:00)',
+  ambig7: '"7" sin AM/PM: puede ser 07:00 o 19:00', ilegible: 'número de hora ilegible en el texto',
+  unica: 'hora única: no dice si es cita, inicio o límite', bad: 'hora inválida' };
+
+function parse3(obs) {
+  let raw = String(obs || '');
+  const typo_suf = re_test(String.raw`\d\s*´\s*M\b`, raw.toUpperCase());
+  raw = re_sub(String.raw`(\d)\s*´\s*[Mm]\b`, m => m[1], raw);
+  const s = pre(clean(raw));
+  const out = { items: [], brk: [], pref: [], notes: [], conf: 'Alta', aviso: null, generic: false, txt: s, used: [] };
+  if (!s) return out;
+  const up = raw.toUpperCase();
+  if (typo_suf) out.notes.push('sufijo de hora ilegible ("´M"): se leyó la hora sin AM/PM');
+  if (re_test(String.raw`\d\s*(AAM|MM|AA)\b`, up)) { out.notes.push('sufijo de hora mal escrito leído como AM'); out.conf = 'Media'; }
+  out.aviso = parse_aviso(s);
+  let s2 = re_sub(AVISO, ' ', s);
+  s2 = re_sub(String.raw`(ENVIAR|ERNVIAR|MANDAR)[^/]*?DATOS[^/]*`, ' ', s2);
+  s2 = re_sub(String.raw`DATOS[^/]*?(\d+\s*HRS?|UN DIA)\s*ANTES[^/]*`, ' ', s2);
+  s2 = re_sub(String.raw`TIEMPO DE DESCARGA[^/]*`, ' ', s2);
+  s2 = re_sub(String.raw`REVISAR[^/]*?ANTES DE DESPACHAR[^/]*`, ' ', s2);
+  s2 = re_sub(String.raw`TOLERANCIA DE \d+ MIN`, ' ', s2);
+  s2 = re_sub(String.raw`LLEGAR (MEDIA HORA|UNOS MIN) ANTES`, ' ', s2);
+  s2 = re_sub(String.raw`USO DE ASCENSOR A PARTIR DE[^/]*`, ' ', s2);
+  let flags = [];
+  const add = (t, a = null, b = null, q = null, src = '') => out.items.push({ t, a, b, q, src: src.trim() });
+  const pushF = f => { if (f) flags.push(f); };
+  const segs = s2.split(/\/\/+|\/|;|\|/).map(x => x.trim()).filter(x => x);
+  const RANGE_RE = String.raw`(?:(RANGO|HORARIO|HORARO|ENTRE|DE|DESDE|Y|O|RECEPCION|ATENCION|DISPONIBLE|ENTREGA|TURNO|ENVIAR|RECIBE|LLEGAR ANTES DE LAS|A PARTIR DE LAS)\s+(?:DE\s+|LAS\s+|ENTREGA\s+DE\s+|DE\s+LAS\s+|UNICO\s+DE\s+DESCARGA\s+)?)?` + T + String.raw`\s*(?:-|–|A|AL|HASTA)\s*(?:LAS\s+)?` + T + NOT_AFTER;
+  for (let seg of segs) {
+    const k = re_search(BRK_KW, seg);
+    if (k) {
+      const ks = k.index;
+      const after = re_all(RNG3, seg.slice(ks)), before = re_all(RNG3, seg.slice(0, ks));
+      let m = null, off = 0;
+      if (after.length) { m = after[0]; off = ks; } else if (before.length) m = before[before.length - 1];
+      if (m) {
+        const r = resolve_range(g(m, 1), g(m, 2), g(m, 3), g(m, 4), g(m, 5), g(m, 6));
+        if (r) {
+          out.brk.push([r[0], r[1]]); flags = flags.concat(r[2]); out.used.push(m[0]);
+          seg = seg.slice(0, off + mStart(m)) + ' ' + seg.slice(off + mEnd(m));
+        }
+      }
+      seg = re_sub(BRK_KW, ' ', seg);
+      seg = re_sub(String.raw`\bES (HORARIO DE )?\b`, ' ', seg);
+    }
+    let m = re_search(String.raw`HASTA\s*(?:LAS\s*)?` + T + String.raw`\s+O\s+(?:DESDE\s+|A PARTIR DE\s+)?(?:LAS\s+)?` + T, seg);
+    if (m) {
+      const [v1, f1] = lit(m[1], g(m, 2), g(m, 3)), [v2, f2] = lit(m[4], g(m, 5), g(m, 6));
+      if (v1 && v2) { add('limite', null, v1, null, m[0]); add('desde', v2, null, null, m[0]); pushF(f1); pushF(f2); continue; }
+    }
+    let found = false, last_end = -1;
+    for (const mm of re_all(RANGE_RE, seg)) {
+      const kw = g(mm, 1);
+      const h1 = g(mm, 2), m1 = g(mm, 3), s1 = g(mm, 4), h2 = g(mm, 5), m2 = g(mm, 6), s2_ = g(mm, 7);
+      if (!kw && !(s1 || s2_ || m1 || m2)) {
+        if (!RX(String.raw`^\s*(Y|-|–)\s*(DE\s+)?\d`).test(seg.slice(mEnd(mm))) && !RX(String.raw`[-–]\s*$`).test(seg.slice(0, mStart(mm))) && mStart(mm) !== last_end) continue;
+      }
+      const nxt = seg.slice(mEnd(mm), mEnd(mm) + 1);
+      const r = resolve_range(h1, m1, s1, h2, m2, s2_);
+      if (!r) continue;
+      add('rango', r[0], r[1], null, mm[0]); flags = flags.concat(r[2]); last_end = mEnd(mm);
+      if (/^\p{Nd}$/u.test(nxt)) flags.push('ilegible');
+      found = true;
+    }
+    if (found) continue;
+    m = re_search(String.raw`(CIERRAN? A LAS|ANTES DE(?:L)?\s*(?:LA|LAS)?|HASTA\s*(?:LAS|LA)?|MAXIMO(?:\s*HASTA)?\s*(?:LAS)?|MAX(?:\s*HASTA)?\s*(?:LAS)?|TIEMPO MAX(?:IMO)?|LIMITE)\s*` + T + NOT_AFTER, seg);
+    if (m && !re_test(String.raw`ANTES DE (DESPACHAR|LLEGAR|LA ENTREGA)`, seg.slice(mStart(m), mStart(m) + 30))) {
+      const [v, f] = lit(m[2], g(m, 3), g(m, 4));
+      if (v !== null) {
+        const q = re_test(String.raw`(POR|EN) LA TARDE`, seg) ? 'TARDE' : re_test(String.raw`(POR|EN) LA MAÑANA`, seg) ? 'MAÑANA' : null;
+        add('limite', null, v, q, m[0]); pushF(f); continue;
+      }
+    }
+    if (re_test(String.raw`MAXIMO MEDIO DIA|HASTA EL MEDIO DIA|ANTES DEL? MEDIO DIA|\bAL MEDIO DIA\b|12 MEDIO DIA`, seg) && !re_test(String.raw`PARTIR|DIA ANTES AL MEDIO DIA`, seg)) { add('limite', null, 12.0, null, 'MEDIO DIA'); continue; }
+    m = re_search(String.raw`A LAS\s*` + T + String.raw`.{0,12}MAXIMO`, seg);
+    if (m) { const [v, f] = lit(m[1], g(m, 2), g(m, 3)); if (v !== null) { add('limite', null, v, null, m[0]); pushF(f); continue; } }
+    m = re_search(T + String.raw`\s*[.,]?\s*EN ADELANTE`, seg);
+    if (m) { const [v, f] = lit(m[1], g(m, 2), g(m, 3)); if (v !== null) { add('desde', v, null, null, m[0]); pushF(f); continue; } }
+    m = re_search(String.raw`(A PARTIR DE(?:L)?(?:\s*LAS?)?|A PARTR DE(?:\s*LAS)?|APARTIR DE(?:\s*LAS)?|DESDE(?:\s*DE)?(?:\s*LAS)?|ABREN DESDE LAS)\s*` + T + NOT_AFTER, seg);
+    if (m) { const [v, f] = lit(m[2], g(m, 3), g(m, 4)); if (v !== null) { add('desde', v, null, null, m[0]); pushF(f); continue; } }
+    if (re_test(String.raw`A PARTIR DEL MEDIO DIA`, seg)) { add('desde', 12.0, null, null, 'MEDIO DIA'); continue; }
+    m = re_search(String.raw`(CITAS?(?: A LAS)?|PUNTUALMENTE A LAS|ESTAR A LAS|PARA LAS|INGRESO|HORARIO UNI(?:C)?O|\bA LAS)\s*` + T + NOT_AFTER, seg);
+    if (m) { const [v, f] = lit(m[2], g(m, 3), g(m, 4)); if (v !== null) { add('cita', v, v, null, m[0]); pushF(f); continue; } }
+    m = re_search(String.raw`(HORARIO(?:\s*(?:APROX|PERMITIDO|DE DESCARGA|DE RECEPCION|DE ENTREGA))?\W*|SOO RECIBE|SOLO RECIBE|RECIBE|RANGO)\s*` + T + NOT_AFTER, seg);
+    if (m && (g(m, 4) || g(m, 3) || re_test('COORDINADO', seg))) {
+      const [v, f] = lit(m[2], g(m, 3), g(m, 4));
+      if (v !== null) {
+        if (re_test('COORDINADO|APROX', seg)) { add('cita', v, v, null, m[0]); pushF(f); out.notes.push('hora coordinada/aproximada tomada como cita'); }
+        else { add('unica', v, v, null, m[0]); flags.push('unica'); }
+        continue;
+      }
+    }
+    m = re_search(T + String.raw`\s*INDICA EL CLIENTE`, seg);
+    if (m) { const [v] = lit(m[1], g(m, 2), g(m, 3)); if (v !== null) { add('llegada', v, v, null, m[0]); continue; } }
+    if (re_test(String.raw`(POR|EN|DE|RANGO|TURNO|TRANSCURSO DE) LA MAÑANA|RANGO MAÑANA|TURNO MAÑANA`, seg) && !re_test(String.raw`\bNO (TIENEN|HAY|RECIBE)`, seg)) { add('franja', null, null, 'MAÑANA', 'MAÑANA'); continue; }
+    if (re_test(String.raw`(POR|EN|DE|RANGO|TURNO) LA TARDE|TURNO TARDE`, seg)) { add('franja', null, null, 'TARDE', 'TARDE'); continue; }
+    if (re_test(String.raw`(ARMADO|EMBALADO)( Y \w+)? TEMPRANO`, seg)) continue;
+    if (re_test(String.raw`PRIMER PUNTO|PRIMEROS PUNTOS`, seg)) { out.pref.push('PRIMER PUNTO'); continue; }
+    if (re_test(String.raw`\b(1ER|PRIMER) (TURNO|TRUNO)`, seg)) { out.pref.push('1ER TURNO'); continue; }
+    if (re_test(String.raw`TEMPRAN|PRIMERA HORA|LO ANTES POSIBLE|LO MAS PRONTO`, seg)) { out.pref.push('LO MÁS TEMPRANO'); continue; }
+    if (re_test(String.raw`CLIENTE CON HORARIO|RESPETAR HORARIO|CON HORARIO|\bRANGO\b|\bHORARIO\b`, seg) && !re_test('NO HAY MAS RANGO', seg)) out.generic = true;
+  }
+  let resid = s2;
+  for (const x of out.items) if (x.src) resid = replAll(resid, x.src, ' ');
+  for (const u of out.used) resid = replAll(resid, u, ' ');
+  const known = new Set();
+  for (const x of out.items) for (const v of [x.a, x.b]) if (v !== null) known.add(pyRound(v, 2));
+  for (const b_ of out.brk) for (const v of b_) known.add(pyRound(v, 2));
+  let lefts = re_all(String.raw`\b(\d{1,2})(?::(\d{2}))?\s*(AM|PM)\b` + NOT_AFTER, resid);
+  lefts = lefts.filter(mm => { const v = lit(mm[1], g(mm, 2), g(mm, 3))[0]; return !known.has(pyRound(v || -9, 2)); });
+  if ((out.items.length || out.brk.length) && lefts.length) { flags.push('resto'); out.notes.push(`hora "${lefts[0][0]}" en el texto no quedó interpretada`); }
+  const seen = new Set();
+  for (const f of flags) { if (seen.has(f)) continue; seen.add(f); if (f === 'resto') continue; out.notes.push(f in NOTE ? NOTE[f] : f); }
+  const fs = new Set(flags);
+  if (['ambig7', 'ilegible', 'unica', 'bad', 'resto'].some(f => fs.has(f)) || (out.generic && !out.items.length && !out.brk.length)) out.conf = 'Revisar';
+  else if (['pm', 'am12'].some(f => fs.has(f)) && out.conf !== 'Revisar') out.conf = 'Media';
+  if (out.generic && !out.items.length && !out.brk.length) out.notes.push('menciona un horario pero no se puede leer ninguna hora');
+  return out;
+}
+
+// orden de tuplas como Python
+const cmpT = (x, y) => (x[0] - y[0]) || (x[1] - y[1]);
+function uniqSorted(arr) { const k = new Map(); arr.forEach(t => k.set(t[0] + '|' + t[1], t)); return [...k.values()].sort(cmpT); }
+
+function combine(p) {
+  const it = p.items;
+  let rng = it.filter(x => ['rango', 'cita', 'unica'].includes(x.t)).map(x => [x.a, x.b]);
+  const lim = it.filter(x => x.t === 'limite').map(x => x.b);
+  const des = it.filter(x => x.t === 'desde').map(x => x.a);
+  const fr = it.filter(x => x.t === 'franja').map(x => x.q);
+  let q = (it.find(x => x.t === 'limite' && x.q) || {}).q || null;
+  if (q === null && fr.length && lim.length && !rng.length) q = fr[0];
+  const citas_ = it.filter(x => x.t === 'cita').map(x => x.a);
+  const rr_ = it.filter(x => x.t === 'rango').map(x => [x.a, x.b]);
+  if (citas_.length && rr_.length && citas_.some(c => rr_.some(([a, b]) => a <= c && c <= b))) {
+    p._desc = rr_.filter(([a, b]) => citas_.some(c => a <= c && c <= b))[0];
+    rng = citas_.map(c => [c, c]);
+  }
+  const lleg = it.filter(x => x.t === 'llegada').map(x => x.a);
+  if (lleg.length && rng.length && rng.every(([a, b]) => a === b)) { const mn = Math.min(...lleg); rng = [[mn, mn]]; }
+  let wins = [];
+  if (rng.length) {
+    wins = uniqSorted(rng);
+    for (const b of lim) { const clipped = wins.filter(([a]) => a <= b).map(([a, e]) => [a, Math.min(e, b)]); wins = clipped.length ? clipped : wins.concat([[OPEN_L, b]]); }
+    for (const a of des) {
+      if (wins.every(([, e]) => e <= a)) wins.push([a, OPEN_R]);
+      else { const w2 = wins.filter(([, e]) => e >= a).map(([x, e]) => [Math.max(x, a), e]); wins = w2.length ? w2 : wins; }
+    }
+  } else if (lim.length && des.length) { const b = Math.min(...lim), a = Math.max(...des); wins = a < b ? [[a, b]] : [[OPEN_L, b], [a, OPEN_R]]; }
+  else if (lim.length) wins = [[OPEN_L, Math.min(...lim)]];
+  else if (des.length) wins = [[Math.max(...des), OPEN_R]];
+  let eff = [];
+  for (const [a, b] of wins) {
+    let segs = [[a, b]];
+    for (const [x, y] of p.brk) {
+      const ns = [];
+      for (const [u, v] of segs) { if (y <= u || x >= v || u === v) ns.push([u, v]); else { if (u < x) ns.push([u, x]); if (y < v) ns.push([y, v]); } }
+      segs = ns;
+    }
+    eff = eff.concat(segs);
+  }
+  if (!wins.length && p.brk.length) eff = p.brk.slice(0, 1).map(([x]) => [OPEN_L, x]).concat([[p.brk[0][1], OPEN_R]]);
+  return [wins, eff, fr, q];
+}
+
+function describe(p) {
+  const [wins, eff, fr, q] = combine(p);
+  const types = new Set(p.items.map(x => x.t));
+  const brk = p.brk;
+  if (!p.items.length && !brk.length) {
+    if (p.generic) return { tipo: 'Horario no legible', norm: 'HORARIO SIN HORA LEGIBLE', wins: [], ini: null, fin: null, amp: null };
+    if (p.pref.length) {
+      const order = ['LO MÁS TEMPRANO', 'PRIMER PUNTO', '1ER TURNO'];
+      return { tipo: 'Preferencia sin hora', norm: order.filter(o => p.pref.includes(o)).join(' / ') + ' (sin hora)', wins: [], ini: null, fin: null, amp: null };
+    }
+    return null;
+  }
+  const parts = [];
+  for (const [a, b] of wins) {
+    if (a === OPEN_L && b === OPEN_R) continue;
+    if (a === OPEN_L) parts.push((q ? q + ' · ' : '') + 'ANTES DE ' + fmt(b));
+    else if (b === OPEN_R) parts.push('DESDE ' + fmt(a));
+    else if (a === b) {
+      let pre_ = types.has('unica') && !types.has('cita') ? 'HORA' : 'CITA';
+      const citas = p.items.filter(x => x.t === 'cita').map(x => x.a);
+      let extra = '';
+      if (types.has('llegada') && citas.length && Math.min(...citas) !== a) { pre_ = 'LLEGAR'; extra = ` (cita ${fmt(Math.min(...citas))})`; }
+      if (p._desc && pre_ === 'CITA') extra = ` (descarga ${fmt(p._desc[0])}–${fmt(p._desc[1])})`;
+      parts.push(`${pre_} ${fmt(a)}` + (pre_ === 'HORA' ? ' (sin precisar)' : extra));
+    } else parts.push(`${fmt(a)}–${fmt(b)}`);
+  }
+  if (!parts.length && fr.length) parts.push([...new Set(fr)].join(' / ') + ' (sin hora)');
+  let norm = parts.join(' / ');
+  if (brk.length) { const nb = 'NO RECIBE ' + brk.map(([x, y]) => `${fmt(x)}–${fmt(y)}`).join(', '); norm = norm ? `${norm} · ${nb}` : nb; }
+  let tipo;
+  if (types.has('cita') && wins.length === 1 && wins[0][0] === wins[0][1]) tipo = 'Cita / hora exacta';
+  else if (types.has('unica') && wins.length === 1 && wins[0][0] === wins[0][1]) tipo = 'Hora única sin precisar';
+  else if ((wins.length && wins.some(([a, b]) => a !== OPEN_L && b !== OPEN_R)) || wins.length > 1) tipo = 'Rango horario';
+  else if (wins.length && wins[0][0] === OPEN_L) tipo = 'Hora límite (antes de)';
+  else if (wins.length && wins[0][1] === OPEN_R) tipo = 'A partir de (desde)';
+  else if (fr.length) tipo = 'Franja sin hora (mañana/tarde)';
+  else if (brk.length) tipo = 'Solo pausa de refrigerio';
+  else tipo = 'Horario no legible';
+  const starts = wins.map(w => w[0]), ends = wins.map(w => w[1]);
+  const ini = wins.length && !starts.includes(OPEN_L) ? Math.min(...starts) : null;
+  const fin = wins.length && !ends.includes(OPEN_R) ? Math.max(...ends) : null;
+  let amp = null;
+  if (wins.length && ini !== null && fin !== null) amp = pyRound(eff.reduce((s, [a, b]) => s + (b - a), 0), 2);
+  return { tipo, norm, wins: wins.length ? eff : (brk.length ? eff : []), ini, fin, amp };
+}
+
+/* ---- ajustes para las apps (no cambian ningún texto del histórico) ---- */
+function ajustar(s){
+  s=String(s||'').toUpperCase().replace(/Ñ/g,'NN').normalize('NFD').replace(/\p{Mn}/gu,'').replace(/NN/g,'Ñ');
+  /* "no recibe después de las 4" = hasta las 16:00 · "no recibe antes de las 9" = desde las 09:00 */
+  s=s.replace(/\bNO\s+(?:SE\s+)?(?:RECIBEN?|ATIENDEN?|ENTREGAR)\b([^/;|]{0,25}?)\b(DESPUES\s+DE(?:L)?|A\s+PARTIR\s+DE(?:L)?|DESDE)\s*(?:LAS?\s+)?(?=\d|MEDIO)/g,(m,x)=>'ENTREGAR'+x+' HASTA LAS ');
+  s=s.replace(/\bNO\s+(?:SE\s+)?(?:RECIBEN?|ATIENDEN?|ENTREGAR)\b([^/;|]{0,25}?)\bANTES\s+DE(?:L)?\s*(?:LAS?\s+)?(?=\d|MEDIO)/g,(m,x)=>'ENTREGAR'+x+' DESDE LAS ');
+  /* "no recibe de 12 a 1" = refrigerio, no ventana de entrega */
+  s=s.replace(/\bNO\s+(?:SE\s+)?RECIBEN?\s+(?=(?:DE|ENTRE)\s+(?:LAS?\s+)?\d)/g,'NO ATIENDE ');
+  /* cantidades no son horas: "de 12 a 15 unidades", "2 a 3 cajas" */
+  s=s.replace(/\b\d{1,3}\s*(?:A|-|Y|O)\s*\d{1,3}\s*(?=(?:HORAS|MINUTOS|DIAS|UNIDADES|UNID|UND|UDS|CAJAS?|BULTOS?|SILLAS?|PIEZAS?|PAQUETES?|MESAS?|JUEGOS?|PARES|KG|KILOS?|METROS?|ROLLOS?|PLANCHAS?|DOCENAS?|ITEMS?|PRODUCTOS?)\b)/g,' ');
+  /* "antes 10am", "antes las 10" (sin "de") · "hasta medio día" */
+  s=s.replace(/\bANTES\s+(?:LAS?\s+)?(?=\d)/g,'ANTES DE LAS ');
+  s=s.replace(/\bHASTA\s+(?:EL\s+)?MEDIO\s*-?\s*DIA\b/g,'HASTA EL MEDIO DIA');
+  /* "12 m" = mediodía */
+  s=s.replace(/\b(A|HASTA|LAS|DE|ANTES DE)\s+12\s*M\b(?!TS|T\b|ETRO)/g,'$1 12:00');
+  return s;
+}
+const TU=String.raw`(\d{1,2})(?:\s*[:.]\s*(\d{2}))?\s*(AM|PM)?`;
+const _c=new Map();
+const mn=v=>v==null||v===OPEN_L||v===OPEN_R?null:Math.round(v*60);
+const ORDEN_PREF={'LO MÁS TEMPRANO':'lo más temprano','PRIMER PUNTO':'primer punto de la ruta','1ER TURNO':'salir en 1er turno'};
+function leer(texto){
+  const s=ajustar(texto);
+  if(!s.trim())return null;
+  const p=parse3(s),d=describe(p);
+  if(!d){
+    /* "ENTREGAR 10AM", "entrega 2 pm": una hora sin decir si es cita o límite → revisar */
+    const m=RX(String.raw`\b(ENTREG\w*|DESPACH\w*|LLEGA\w*)\b[^/;|]{0,20}?\b`+TU+NOT_AFTER).exec(clean(s));
+    if(m&&(m[4]||m[3])){const v=lit(m[2],m[3],m[4])[0];if(v!=null&&v>=6&&v<=21)return {tipo:'revisar',etiqueta:'Hora '+fmt(v)+' (sin precisar)'};}
+    return null;
+  }
+  const brk=p.brk.map(([a,b])=>[mn(a),mn(b)]);
+  if(d.tipo==='Preferencia sin hora')return {tipo:'pref',etiqueta:p.pref.map(x=>ORDEN_PREF[x]||x.toLowerCase()).filter((x,i,a)=>a.indexOf(x)===i).join(' · ')};
+  if(d.tipo==='Horario no legible')return {tipo:'revisar',etiqueta:'Horario sin hora clara'};
+  if(d.tipo==='Hora única sin precisar'){const w=d.wins[0];return {tipo:'revisar',etiqueta:'Hora '+fmt(w[0])+' (sin precisar)',brk};}
+  if(d.tipo==='Franja sin hora (mañana/tarde)'){const [,, fr]=combine(p);return {tipo:'revisar',etiqueta:[...new Set(fr)].map(q=>q==='MAÑANA'?'Por la mañana':'Por la tarde').join(' / ')+' (sin hora)',brk};}
+  if(d.tipo==='Solo pausa de refrigerio')return {tipo:'refrigerio',brk};
+  const [wins]=combine(p);
+  let fr=(d.wins.length?d.wins:wins).map(([a,b])=>[mn(a),mn(b)]).filter(([a,b])=>a==null||b==null||b>=a);
+  if(!fr.length)return null;
+  const r={tipo:'ventana',franjas:fr,desde:fr[0][0],hasta:fr[fr.length-1][1],brk,dudosa:p.conf==='Revisar',norm:d.norm};
+  if(d.tipo==='Cita / hora exacta'||/^(CITA|LLEGAR) /.test(d.norm)){
+    r.hasta=mn(wins[0][0]);r.desde=null;r.franjas=[[null,r.hasta]];r.cita=r.hasta;
+    const c=/\(cita (\d\d):(\d\d)\)/.exec(d.norm);if(/^LLEGAR/.test(d.norm)&&c){r.llegar=r.hasta;r.cita=+c[1]*60+ +c[2];}
+  }
+  return r;
+}
+function restriccionDe(texto){const k=String(texto||'');if(_c.has(k))return _c.get(k);let v=null;try{v=leer(k);}catch(e){v=null;}if(_c.size>3000)_c.clear();_c.set(k,v);return v;}
+/* textos de varias facturas de una misma parada: cada uno es un tramo aparte */
+restriccionDe.unir=obs=>[...new Set(obs.map(x=>String(x||'').trim()).filter(Boolean))].join(' // ');
+return {restriccionDe,parse3,describe};
+})();
+const restriccionDe=RH.restriccionDe;
+const IC_RELOJ='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg>';
+const mmTxt=x=>String(Math.floor(x/60)).padStart(2,'0')+':'+String(x%60).padStart(2,'0');
+const durTxt=x=>x>=60?Math.floor(x/60)+' h'+(x%60?' '+(x%60)+' min':''):x+' min';
+function aMinHora(h){const m=/(\d{1,2}):(\d{2})/.exec(horaCorta(h)||'');return m?(+m[1])*60+(+m[2]):null;}
+/* etiqueta de la parada (chofer): horario escrito por el asesor, cuánto falta y si llegaron a tiempo.
+   Sin hora clara → solo pide revisar la observación (no se inventa hora ni se juzga la llegada). */
+function rhRango(r){
+  const F=r.franjas,uno=([a,b])=>a==null?'hasta '+mmTxt(b):b==null?'desde '+mmTxt(a):mmTxt(a)+'–'+mmTxt(b);
+  if(r.llegar!=null)return `Llegar a las <b>${mmTxt(r.llegar)}</b> <small>(cita ${mmTxt(r.cita)})</small>`;
+  if(r.cita!=null)return `Cita a las <b>${mmTxt(r.cita)}</b>`;
+  if(F.length>1)return F.map(f=>`<b>${uno(f)}</b>`).join(' y ');
+  const [a,b]=F[0];
+  return a!=null&&b!=null?`De <b>${mmTxt(a)}</b> a <b>${mmTxt(b)}</b>`:b!=null?`Antes de las <b>${mmTxt(b)}</b>`:`Desde las <b>${mmTxt(a)}</b>`;
+}
+function restrHtml(s,lleg,final,esHoy){
+  const r=restriccionDe(restriccionDe.unir(s.peds.map(p=>p.OBSERVACION)));
+  if(!r)return '';
+  const yaLlego=!!(lleg||final);
+  const d0=new Date(Date.now()-5*3600e3),ahora=d0.getUTCHours()*60+d0.getUTCMinutes();
+  const suave=(html,tit)=>yaLlego?'':`<div class="rh duda" title="${tit}">${IC_RELOJ}<span>${html}</span></div>`;
+  if(r.tipo==='pref')return suave('Pide: <b>'+esc(r.etiqueta)+'</b>','El cliente lo pidió, pero sin hora');
+  if(r.tipo==='revisar')return suave(esc(r.etiqueta)+' · <b>revisa la observación</b>','La observación habla de horario, pero no dice una hora clara');
+  if(r.tipo==='refrigerio'){
+    if(yaLlego)return '';
+    const b=esHoy&&r.brk.find(([a,b])=>ahora>=a&&ahora<b),t=b?'en refrigerio · abre en '+durTxt(b[1]-ahora):'';
+    return `<div class="rh${b?' warn':''}" title="Horario de refrigerio del cliente">${IC_RELOJ}<span>No recibe de <b>${r.brk.map(([a,b])=>mmTxt(a)+' a '+mmTxt(b)).join(', ')}</b></span>${t?`<span class="rh-t">${t}</span>`:''}</div>`;
+  }
+  const rango=rhRango(r);
+  if(r.dudosa)return suave(rango+' · <b>revisa la observación</b>','Hay una hora que no se lee bien en la observación');
+  const F=r.franjas,ll=lleg?aMinHora(lleg):null,dentro=x=>F.some(([a,b])=>(a==null||x>=a)&&(b==null||x<=b));
+  let cls='',t='';
+  if(ll!=null){
+    if(r.hasta!=null&&ll>r.hasta){cls='tarde';t='llegó '+mmTxt(ll)+' · '+durTxt(ll-r.hasta)+' tarde';}
+    else if(r.desde!=null&&ll<r.desde){cls='ok';t='llegó '+mmTxt(ll)+' · antes de hora';}
+    else if(!dentro(ll)){cls='ok';t='llegó '+mmTxt(ll)+' · en la pausa';}
+    else{cls='ok';t='✓ llegó '+mmTxt(ll)+' a tiempo';}
+  }else if(final){cls='ok';}
+  else if(esHoy){
+    const act=F.find(([a,b])=>(a==null||ahora>=a)&&(b==null||ahora<=b)),sig=F.find(([a])=>a!=null&&a>ahora);
+    if(act){
+      if(act[1]==null)t='ya recibe';
+      else{const q=act[1]-ahora,otra=F.some(([a])=>a!=null&&a>act[1]);
+        if(q<=30&&!otra){cls='warn';t=q?'quedan '+durTxt(q):'es la hora límite';}
+        else t=(otra?'pausa en ':'faltan ')+durTxt(q);}
+    }else if(sig)t='abre en '+durTxt(sig[0]-ahora);
+    else if(r.hasta!=null){cls='tarde';t='vencida hace '+durTxt(ahora-r.hasta);}
+  }
+  return `<div class="rh ${cls}" title="Horario del cliente según la observación">${IC_RELOJ}<span>${rango}</span>${t?`<span class="rh-t">${t}</span>`:''}</div>`;
+}
 function tarjeta(s,esSig,idx,editable){
   if(editable===undefined)editable=true;
   const p0=s.peds[0];
@@ -1834,7 +2439,7 @@ function tarjeta(s,esSig,idx,editable){
         ${e.estado==='ENTREGA PARCIAL'&&e.detalle?`<small style="color:var(--parc)">Rechazado: ${esc(e.detalle)}</small>`:''}</span>
       ${e.pend?`<span class="est pend c-${EST[e.estado].cls}" title="Por enviar: se envía solo cuando haya señal"><span class="vh">Por enviar: </span>${TXT_EST[e.estado]}</span>`:estHtml(e.estado)}${editable?'<span class="flecha" aria-hidden="true">›</span></button>':'</div>'}`;}).join('');
   const porHora=(x,y)=>horaCorta(x).localeCompare(horaCorta(y));
-  const lleg=s.est.map(e=>e.horaLlegada).filter(Boolean).sort(porHora)[0];
+  const lleg=s.est.map(e=>e.horaLlegada).filter(Boolean).sort(porHora)[0];   // (v31: también lo usa la restricción horaria)
   const fin=s.est.map(e=>e.horaFin).filter(Boolean).sort(porHora).slice(-1)[0];
   let horas='';
   if(lleg||fin){
@@ -1865,6 +2470,7 @@ function tarjeta(s,esSig,idx,editable){
         ${esSig?`<span class="etq-sig">${s.estado==='EN PROCESO'?'Atendiendo ahora':'Siguiente parada'}</span>`:''}
         <div class="cli">${esc(titulo(p0.CLIENTES)||'Cliente sin nombre')}</div></div>${final?'':btnNov}</div>
       <div class="meta">${esc(titulo(p0.DISTRITO))}${s.orden&&s.orden!==s.n?`<span class="prog-n" title="Orden en que lo programó el supervisor">prog. ${s.n}</span>`:''}${tipoCls?`<span class="ch ${tipoCls}">${esc(titulo(tipoCls))}</span>`:''}${!compacta&&(comp||part)?` · ${comp} compl. + ${part} partes`:''}</div>
+      ${restrHtml(s,lleg,final,(sel.fechaDia||'')===hoyLima())}
       ${!compacta&&obs.length?`<div class="nota">${obs.map(esc).join('<br>')}</div>`:''}
       <div class="facs">${facs}</div>${novHtml}${horas||btnsPie?`<div class="t-pie">${horas||'<span></span>'}${btnsPie}</div>`:''}${acc}
     </div></div>`;
@@ -2053,6 +2659,7 @@ function abrirHoja(prog,u,s,p){
 /* desdePop: la cerró el botón atrás del celular (el historial ya retrocedió) */
 function cerrarHoja(desdePop){
   if(!hojaCtx)return;
+  if(hojaCtx.modo==='foto'){limpiarSalidaCamara();avisoCortada='';}
   if(hojaCtx.modo==='foto'&&hojaCtx.pend)toast('Sin la foto de la guía no se marca la entrega.',true);
   document.getElementById('hoja').classList.add('cerrada');
   document.getElementById('velo').classList.remove('on');
@@ -2068,12 +2675,15 @@ function pintarHoja(){
       <span class="oi">${ICO_EST[e]}</span><span><b>${TXT_EST[e]}</b><small>${esc(EST[e].d)}${NECESITA_FOTO[e]&&fotoObligatoria(h.u)?' · con foto de la guía':''}</small></span></button>`).join('');
   let extra='';
   if(h.elegido==='ANULADO'){
+    if(h.motChip===undefined){const x=separarMotivo(h.motivo,MOTIVOS);h.motChip=x.chip;h.motTxt=x.txt;}
     extra=`<div class="campo"><label for="hMot">Motivo de la anulación <em>(obligatorio)</em></label>
-      <div class="rapidos">${MOTIVOS.map(m=>`<button data-mot="${esc(m)}">${esc(m)}</button>`).join('')}</div>
-      <textarea id="hMot" maxlength="500" placeholder="Escribe por qué se anula el envío">${esc(h.motivo)}</textarea></div>`;
+      <div class="rapidos">${MOTIVOS.map(m=>`<button type="button" data-mot="${esc(m)}" class="${m===h.motChip?'on':''}" aria-pressed="${m===h.motChip}">${esc(m)}</button>`).join('')}</div>
+      <textarea id="hMot" maxlength="500" placeholder="${h.motChip?'Explica brevemente qué pasó (opcional)':'Elige un motivo o escribe por qué se anula'}">${esc(h.motTxt)}</textarea></div>`;
   }else if(h.elegido==='ENTREGA PARCIAL'){
+    if(h.detChip===undefined){const x=separarMotivo(h.detalle,MOTIVOS_PARC);h.detChip=x.chip;h.detTxt=x.txt;}
     extra=`<div class="campo"><label for="hDet">¿Qué se rechazó? <em>(opcional)</em></label>
-      <textarea id="hDet" maxlength="500" placeholder="Ej. 2 sillas con el tapiz rasgado">${esc(h.detalle)}</textarea></div>`;
+      <div class="rapidos">${MOTIVOS_PARC.map(m=>`<button type="button" data-det="${esc(m)}" class="${m===h.detChip?'on':''}" aria-pressed="${m===h.detChip}">${esc(m)}</button>`).join('')}</div>
+      <textarea id="hDet" maxlength="500" placeholder="Ej. 2 sillas con el tapiz rasgado">${esc(h.detTxt)}</textarea></div>`;
   }
   const necesitaGuardar=h.elegido==='ANULADO'||h.elegido==='ENTREGA PARCIAL';
   el.innerHTML=`<div class="hoja-top"><button type="button" class="asa-btn" data-cerrar aria-label="Cerrar (o desliza hacia abajo)"><span class="asa"></span></button><button type="button" class="hoja-x" data-cerrar aria-label="Cerrar">✕</button></div><h3 id="hojaTit">Factura ${esc(h.p.FACTURA||'sin número')}</h3>
@@ -2085,10 +2695,15 @@ function pintarHoja(){
     <button class="nov-link" id="hNov">${SVG.bandera}<span><b>Registrar una novedad</b><small>Demora del cliente, cambio de dirección, sin respuesta…</small></span>${SVG.chev}</button>
     <button class="btn-sec" id="hNo">Cancelar</button>`;
   el.querySelectorAll('[data-op]').forEach(b=>b.onclick=()=>elegir(b.dataset.op));
+  /* v31: un toque elige el motivo (otro toque lo quita); el texto es la explicación */
   el.querySelectorAll('[data-mot]').forEach(b=>b.onclick=()=>{
-    const t=document.getElementById('hMot');t.value=t.value.trim()?t.value.trim()+'. '+b.dataset.mot:b.dataset.mot;h.motivo=t.value;t.classList.remove('falta');});
-  const tm=document.getElementById('hMot');if(tm)tm.oninput=()=>{h.motivo=tm.value;tm.classList.remove('falta');};
-  const td=document.getElementById('hDet');if(td)td.oninput=()=>{h.detalle=td.value;};
+    h.motTxt=document.getElementById('hMot').value;h.motChip=h.motChip===b.dataset.mot?'':b.dataset.mot;h.motivo=unirMotivo(h.motChip,h.motTxt);
+    vibrar(15);pintarHoja();const t=document.getElementById('hMot');if(t&&h.motChip)t.focus({preventScroll:true});});
+  el.querySelectorAll('[data-det]').forEach(b=>b.onclick=()=>{
+    h.detTxt=document.getElementById('hDet').value;h.detChip=h.detChip===b.dataset.det?'':b.dataset.det;h.detalle=unirMotivo(h.detChip,h.detTxt);
+    vibrar(15);pintarHoja();});
+  const tm=document.getElementById('hMot');if(tm)tm.oninput=()=>{h.motTxt=tm.value;h.motivo=unirMotivo(h.motChip,h.motTxt);tm.classList.remove('falta');};
+  const td=document.getElementById('hDet');if(td)td.oninput=()=>{h.detTxt=td.value;h.detalle=unirMotivo(h.detChip,h.detTxt);};
   const tt=document.getElementById('hTodas');if(tt)tt.onchange=()=>{h.todas=tt.checked;};
   const ok=document.getElementById('hOk');if(ok)ok.onclick=confirmarHoja;
   document.getElementById('hNo').onclick=()=>cerrarHoja();
@@ -2158,7 +2773,7 @@ function confirmarHoja(){
   const h=hojaCtx;if(!h||!h.elegido)return;
   const e=h.elegido;
   if(e==='ANULADO'&&!String(h.motivo||'').trim()){
-    const t=document.getElementById('hMot');t.classList.add('falta');t.focus();toast('Escribe el motivo de la anulación.',true);vibrar([30,40,30]);return;
+    const t=document.getElementById('hMot');t.classList.add('falta');t.focus();toast('Elige o escribe el motivo de la anulación.',true);vibrar([30,40,30]);return;
   }
   const peds=h.todas?h.s.peds:[h.p];
   const cambian=peds.filter(p=>{const x=estadoDe(claveDe(h.prog.prog,p));
@@ -2248,6 +2863,8 @@ window.addEventListener('offline',()=>{errEnv='sin conexión';pintarSync();});
 /* ---------- actualización automática del archivo ---------- */
 async function revisarVersion(){
   if(location.protocol==='file:')return;
+  /* v30: nunca en medio de una foto (tomándola, preparándola, subiéndola) ni con una hoja abierta */
+  if(fotoProcesando||subiendo||camCtx||hojaCtx||ordenando){if(!revisarVersion.t)revisarVersion.t=setTimeout(()=>{revisarVersion.t=0;revisarVersion();},60000);return;}
   try{
     const base=location.origin+location.pathname;
     const r=await fetch(base+'?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;
@@ -2311,7 +2928,7 @@ if(datos&&datos.fechaDia!==(sel.fechaDia||hoyLima()))datos=null;
 try{history.replaceState({mr:0},'');}catch(e){}
 pintar();
 if(ses){cargar(sel.fechaDia||hoyLima(),true);ubicar();programarEnvio(500);}
-cargarFotosCola();
+fotosColaP=cargarFotosCola();
 revisarVersion();setInterval(revisarVersion,1800000);
 </script>
 </body>

@@ -18,7 +18,14 @@
     los envía cuando vuelve la conexión.
 */
 
-const VERSION = 'miruta-v2';
+const VERSION = 'miruta-v4';
+const RED_ESPERA = 4000;          // ms: más que esto con la red colgada, se abre la copia guardada
+function conLimite(p, ms) {
+  return new Promise((ok, mal) => {
+    const t = setTimeout(() => mal(new Error('la red no respondió')), ms);
+    p.then(r => { clearTimeout(t); ok(r); }, e => { clearTimeout(t); mal(e); });
+  });
+}
 const PAGINA = './';
 const BASICOS = [
   PAGINA,
@@ -54,20 +61,29 @@ self.addEventListener('fetch', ev => {
   // Nube (Apps Script) y cualquier otro sitio: no se tocan.
   if (url.origin !== self.location.origin) return;
 
-  // La app: red primero; la copia (siempre bajo el mismo nombre, sin ?v=) solo sin señal.
+  // La app: red primero, PERO con límite de espera (v3). Con señal débil la red no
+  // falla: se queda colgada, y el celular mostraba el logo de inicio sin abrir
+  // nunca. Si la red no responde en RED_ESPERA, se abre la copia guardada y la
+  // versión nueva se sigue bajando por detrás (queda lista para la próxima vez).
   const esApp = req.mode === 'navigate' || url.pathname.endsWith('/') || url.pathname.endsWith('.html');
   if (esApp) {
-    ev.respondWith(
-      fetch(req)
-        .then(res => {
-          if (res.ok) {
-            const copia = res.clone();
-            caches.open(VERSION).then(c => c.put(PAGINA, copia)).catch(() => {});
-          }
-          return res;
-        })
-        .catch(() => caches.match(PAGINA, { ignoreSearch: true }))
-    );
+    const red = fetch(req).then(res => {
+      if (res.ok) {
+        const copia = res.clone();
+        caches.open(VERSION).then(c => c.put(PAGINA, copia)).catch(() => {});
+      }
+      return res;
+    });
+    ev.waitUntil(red.then(() => {}, () => {}));
+    ev.respondWith((async () => {
+      try {
+        return await conLimite(red, RED_ESPERA);
+      } catch (e) {
+        const guardada = await caches.match(PAGINA, { ignoreSearch: true });
+        if (guardada) return guardada;
+        return red;                 // primera vez en este celular: no hay copia, se espera a la red
+      }
+    })());
     return;
   }
 
