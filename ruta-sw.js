@@ -18,7 +18,7 @@
     los envía cuando vuelve la conexión.
 */
 
-const VERSION = 'miruta-v4';
+const VERSION = 'miruta-v5';
 const RED_ESPERA = 4000;          // ms: más que esto con la red colgada, se abre la copia guardada
 function conLimite(p, ms) {
   return new Promise((ok, mal) => {
